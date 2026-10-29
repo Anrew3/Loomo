@@ -46,31 +46,69 @@ enum PartsCredentials {
 
     // MARK: Keychain
 
+    // Keys live in the data protection keychain, which belongs to the developer team rather than one exact build:
+    // every signed Loomo, including updates, reads them with no password prompt. Builds without a signing team
+    // can't use it, so they fall back to the login keychain. Keys an older build left in the login keychain move
+    // over when Loomo can read them without asking; otherwise they're left alone and never prompt.
+
+    private static func query(_ key: String, protected: Bool) -> [String: Any] {
+        var q: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
+                                kSecAttrAccount as String: key]
+        if protected { q[kSecUseDataProtectionKeychain as String] = true }
+        return q
+    }
+
+    /// False for unsigned builds, which have no keychain access group for the data protection keychain.
+    nonisolated(unsafe) private static var dataProtectionAvailable = true
+
     static func value(_ key: String) -> String {
-        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
-                                    kSecAttrAccount as String: key, kSecReturnData as String: true, kSecMatchLimit as String: kSecMatchLimitOne]
+        if dataProtectionAvailable {
+            var q = query(key, protected: true)
+            q[kSecReturnData as String] = true
+            q[kSecMatchLimit as String] = kSecMatchLimitOne
+            var item: CFTypeRef?
+            let status = SecItemCopyMatching(q as CFDictionary, &item)
+            if status == errSecSuccess, let data = item as? Data { return String(decoding: data, as: UTF8.self) }
+            if status == errSecMissingEntitlement { dataProtectionAvailable = false }
+        }
+        // The login keychain, never showing a password prompt.
+        var legacy = query(key, protected: false)
+        legacy[kSecReturnData as String] = true
+        legacy[kSecMatchLimit as String] = kSecMatchLimitOne
+        legacy[kSecUseAuthenticationUI as String] = kSecUseAuthenticationUIFail
         var item: CFTypeRef?
-        guard SecItemCopyMatching(query as CFDictionary, &item) == errSecSuccess, let data = item as? Data else { return "" }
-        return String(decoding: data, as: UTF8.self)
+        guard SecItemCopyMatching(legacy as CFDictionary, &item) == errSecSuccess, let data = item as? Data else { return "" }
+        let value = String(decoding: data, as: UTF8.self)
+        if dataProtectionAvailable, store(key, value, protected: true) {
+            SecItemDelete(query(key, protected: false) as CFDictionary)
+        }
+        return value
     }
 
     /// Stores a value; an empty one removes it.
     @discardableResult
     static func set(_ key: String, _ value: String) -> Bool {
-        let base: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service,
-                                   kSecAttrAccount as String: key]
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else {
+        if dataProtectionAvailable, store(key, trimmed, protected: true) { return true }
+        return store(key, trimmed, protected: false)
+    }
+
+    private static func store(_ key: String, _ value: String, protected: Bool) -> Bool {
+        let base = query(key, protected: protected)
+        guard !value.isEmpty else {
             let status = SecItemDelete(base as CFDictionary)
             return status == errSecSuccess || status == errSecItemNotFound
         }
-        let data = Data(trimmed.utf8)
+        let data = Data(value.utf8)
         let update = SecItemUpdate(base as CFDictionary, [kSecValueData as String: data] as CFDictionary)
         if update == errSecSuccess { return true }
+        if update == errSecMissingEntitlement { dataProtectionAvailable = false; return false }
         var add = base
         add[kSecValueData as String] = data
         add[kSecAttrLabel as String] = "Loomo parts source"
-        return SecItemAdd(add as CFDictionary, nil) == errSecSuccess
+        let status = SecItemAdd(add as CFDictionary, nil)
+        if status == errSecMissingEntitlement { dataProtectionAvailable = false }
+        return status == errSecSuccess
     }
 
     // MARK: Settings for the engine

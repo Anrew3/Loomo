@@ -103,23 +103,32 @@ fi
 echo "Building the disk image…"
 ditto "$APP" "$STAGE/Loomo.app"
 ln -s /Applications "$STAGE/Applications"
+mkdir "$STAGE/.background"
+cp Design/DMG/background.tiff "$STAGE/.background/background.tiff"
 hdiutil create -volname "Loomo" -srcfolder "$STAGE" -fs HFS+ -format UDRW -ov "$OUT/rw.dmg" >/dev/null 2>&1
-ATTACH="$(hdiutil attach -readwrite -noverify -noautoopen -nobrowse "$OUT/rw.dmg" 2>/dev/null)"
+# Finder can only arrange a disk it can see, so mount it visibly when laying out the window.
+BROWSE=(-nobrowse)
+[ "${LOOMO_DMG_LAYOUT:-1}" != 0 ] && BROWSE=()
+ATTACH="$(hdiutil attach -readwrite -noverify -noautoopen ${BROWSE[@]+"${BROWSE[@]}"} "$OUT/rw.dmg" 2>/dev/null)"
 DEVICE="$(echo "$ATTACH" | awk '/Apple_HFS/ {print $1; exit}')"
 [ -n "$DEVICE" ] || die "couldn't mount the disk image"
-# Optional window layout (LOOMO_DMG_LAYOUT=1): the app on the left, Applications on the right. It scripts Finder,
-# which macOS asks permission for the first time, so it's off by default; the plain layout works the same.
-if [ "${LOOMO_DMG_LAYOUT:-}" = 1 ]; then osascript <<EOF >/dev/null 2>&1 || echo "note: couldn't arrange the DMG window; using the default layout"
+# Its name in Finder: "Loomo", or "Loomo 1" when another Loomo disk is already mounted.
+VOLNAME="$(basename "$(echo "$ATTACH" | awk -F'\t' '/Apple_HFS/ {print $NF; exit}')")"
+# Window layout: the app on the left, an arrow to Applications on the right (Design/DMG/background.tiff). It
+# scripts Finder, which macOS asks permission for the first time; LOOMO_DMG_LAYOUT=0 skips it.
+if [ "${LOOMO_DMG_LAYOUT:-1}" != 0 ]; then osascript <<EOF >/dev/null || echo "note: couldn't arrange the DMG window; using the default layout"
 tell application "Finder"
-  tell disk "Loomo"
+  tell disk "$VOLNAME"
     open
     set current view of container window to icon view
     set toolbar visible of container window to false
     set statusbar visible of container window to false
-    set bounds of container window to {200, 120, 760, 460}
+    set bounds of container window to {200, 120, 760, 488}
     set opts to icon view options of container window
     set arrangement of opts to not arranged
     set icon size of opts to 112
+    set text size of opts to 13
+    set background picture of opts to file ".background:background.tiff"
     set position of item "Loomo.app" of container window to {140, 160}
     set position of item "Applications" of container window to {420, 160}
     update without registering applications
@@ -129,6 +138,7 @@ tell application "Finder"
 end tell
 EOF
 fi
+rm -rf "/Volumes/$VOLNAME/.fseventsd"
 sync
 hdiutil detach "$DEVICE" -quiet 2>/dev/null || hdiutil detach "$DEVICE" -force -quiet
 hdiutil convert "$OUT/rw.dmg" -format UDZO -imagekey zlib-level=9 -o "$DMG" >/dev/null 2>&1 || die "couldn't compress the disk image"

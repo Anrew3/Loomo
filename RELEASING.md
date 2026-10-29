@@ -49,8 +49,9 @@ It needs these repository secrets: `TEAM_ID`; an App Store Connect API key with 
 certificate and notarizes; and `SPARKLE_PRIVATE_KEY`, the exported update key.
 
 `scripts/make-dmg.sh --test` builds the same disk image unsigned, to check the layout locally. Don't publish it:
-on other Macs, Gatekeeper blocks it. `LOOMO_DMG_LAYOUT=1` arranges the DMG window (it scripts Finder, which
-macOS asks permission for once).
+on other Macs, Gatekeeper blocks it. The DMG window shows an arrow from Loomo to Applications (`Design/DMG/background.tiff`, drawn by
+`Design/DMG/make-background.swift`). Arranging it scripts Finder, which macOS asks permission for once;
+`LOOMO_DMG_LAYOUT=0` skips it.
 
 ## What makes installation smooth
 

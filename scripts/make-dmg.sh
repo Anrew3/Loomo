@@ -23,13 +23,21 @@ TEST=0
 [ "${1:-}" = "--test" ] && TEST=1
 
 VERSION="$(grep -m1 'MARKETING_VERSION = ' Loomo.xcodeproj/project.pbxproj | sed 's/.*= *\(.*\);/\1/')"
-BUILD_NUMBER="${LOOMO_BUILD_NUMBER:-$(git rev-list --count HEAD)}"
+# From the version (0.4.1 → 401), so builds made anywhere (this Mac, CI, a fork) number alike and Sparkle orders
+# them by version.
+BUILD_NUMBER="${LOOMO_BUILD_NUMBER:-$(echo "$VERSION" | awk -F. '{ print $1 * 10000 + $2 * 100 + $3 }')}"
 OUT="$ROOT/build/dmg"
 STAGE="$OUT/stage.noindex"   # ".noindex": Spotlight never lists the staged copy as a second Loomo
 SUFFIX=""
 [ $TEST = 1 ] && SUFFIX="-test" || true
 DMG="$OUT/Loomo-$VERSION$SUFFIX.dmg"
 die() { echo "error: $*" >&2; exit 1; }
+# CI: an App Store Connect API key (Admin) signs in place of Xcode's account: LOOMO_ASC_KEY_PATH (.p8),
+# LOOMO_ASC_KEY_ID and LOOMO_ASC_ISSUER_ID.
+AUTH=()
+if [ -n "${LOOMO_ASC_KEY_PATH:-}" ]; then
+  AUTH=(-authenticationKeyPath "$LOOMO_ASC_KEY_PATH" -authenticationKeyID "$LOOMO_ASC_KEY_ID" -authenticationKeyIssuerID "$LOOMO_ASC_ISSUER_ID")
+fi
 
 rm -rf "$OUT"
 mkdir -p "$STAGE"
@@ -46,7 +54,7 @@ else
   [ -n "$TEAM" ] || die "set your team in Config/Local.xcconfig (see Config/Local.xcconfig.example)"
   echo "Archiving Loomo $VERSION ($BUILD_NUMBER), universal (Apple silicon and Intel)…"
   xcodebuild archive -workspace Loomo.xcworkspace -scheme Loomo -configuration Release -destination "generic/platform=macOS" \
-    -archivePath "$OUT/Loomo.xcarchive" -allowProvisioningUpdates DEVELOPMENT_TEAM="$TEAM" CODE_SIGN_STYLE=Automatic \
+    -archivePath "$OUT/Loomo.xcarchive" -derivedDataPath build/DerivedData.noindex -allowProvisioningUpdates ${AUTH[@]+"${AUTH[@]}"} DEVELOPMENT_TEAM="$TEAM" CODE_SIGN_STYLE=Automatic \
     CODE_SIGN_IDENTITY="Apple Development" LOOMO_ICLOUD_SUFFIX= CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
     | grep -E "error:|\*\* ARCHIVE" || true
   [ -d "$OUT/Loomo.xcarchive" ] || die "archive failed"
@@ -66,10 +74,10 @@ EOF
     echo "Signing with Developer ID and sending to Apple's notary service (Xcode's account)…"
     options upload
     xcodebuild -exportArchive -archivePath "$OUT/Loomo.xcarchive" -exportPath "$OUT/upload.noindex" \
-      -exportOptionsPlist "$OUT/ExportOptions.plist" -allowProvisioningUpdates | grep -E "error:|Uploaded|\*\* EXPORT" || true
+      -exportOptionsPlist "$OUT/ExportOptions.plist" -allowProvisioningUpdates ${AUTH[@]+"${AUTH[@]}"} | grep -E "error:|Uploaded|\*\* EXPORT" || true
     echo "Waiting for Apple to notarize (usually a few minutes)…"
     for _ in $(seq 1 60); do
-      if xcodebuild -exportNotarizedApp -archivePath "$OUT/Loomo.xcarchive" -exportPath "$OUT/notarized.noindex" >/dev/null 2>&1; then break; fi
+      if xcodebuild -exportNotarizedApp -archivePath "$OUT/Loomo.xcarchive" -exportPath "$OUT/notarized.noindex" ${AUTH[@]+"${AUTH[@]}"} >/dev/null 2>&1; then break; fi
       sleep 30
     done
     APP="$OUT/notarized.noindex/Loomo.app"
@@ -78,7 +86,7 @@ EOF
     echo "Signing with Developer ID…"
     options export
     xcodebuild -exportArchive -archivePath "$OUT/Loomo.xcarchive" -exportPath "$OUT/export.noindex" \
-      -exportOptionsPlist "$OUT/ExportOptions.plist" -allowProvisioningUpdates | grep -E "error:|\*\* EXPORT" || true
+      -exportOptionsPlist "$OUT/ExportOptions.plist" -allowProvisioningUpdates ${AUTH[@]+"${AUTH[@]}"} | grep -E "error:|\*\* EXPORT" || true
     APP="$OUT/export.noindex/Loomo.app"
     [ -d "$APP" ] || die "export failed"
     echo "Notarizing the app…"
@@ -135,6 +143,39 @@ if [ $TEST = 0 ]; then
     xcrun notarytool submit "$DMG" --keychain-profile "$LOOMO_NOTARY_PROFILE" --wait
     xcrun stapler staple "$DMG"
   fi
+fi
+
+if [ $TEST = 0 ]; then
+  # Sparkle: sign the DMG with the EdDSA update key (login keychain, or SPARKLE_PRIVATE_KEY in CI) and write the
+  # appcast. Attach both files to the GitHub release; Loomo reads releases/latest/download/appcast.xml.
+  SIGN_UPDATE="$(find build/DerivedData.noindex/SourcePackages "$HOME/Library/Developer/Xcode/DerivedData" -path '*artifacts/sparkle/Sparkle/bin/sign_update' 2>/dev/null | head -1)"
+  [ -n "$SIGN_UPDATE" ] || die "Sparkle's sign_update wasn't found; build the app once in Xcode"
+  if [ -n "${SPARKLE_PRIVATE_KEY:-}" ]; then
+    KEYFILE="$(mktemp)"; printf '%s' "$SPARKLE_PRIVATE_KEY" > "$KEYFILE"
+    SIG="$("$SIGN_UPDATE" --ed-key-file "$KEYFILE" "$DMG")"; rm -f "$KEYFILE"
+  else
+    SIG="$("$SIGN_UPDATE" --account loomo "$DMG")"
+  fi
+  MIN_OS="$(/usr/libexec/PlistBuddy -c 'Print :LSMinimumSystemVersion' "$APP/Contents/Info.plist")"
+  REPO="${LOOMO_REPO:-Anrew3/Loomo}"
+  cat > "$OUT/appcast.xml" <<EOF
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Loomo</title>
+    <item>
+      <title>Loomo $VERSION</title>
+      <pubDate>$(LC_ALL=C date -u "+%a, %d %b %Y %H:%M:%S +0000")</pubDate>
+      <sparkle:version>$BUILD_NUMBER</sparkle:version>
+      <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>$MIN_OS</sparkle:minimumSystemVersion>
+      <sparkle:releaseNotesLink>https://github.com/$REPO/releases/tag/v$VERSION</sparkle:releaseNotesLink>
+      <enclosure url="https://github.com/$REPO/releases/download/v$VERSION/$(basename "$DMG")" type="application/x-apple-diskimage" $SIG/>
+    </item>
+  </channel>
+</rss>
+EOF
+  echo "Appcast: $OUT/appcast.xml"
 fi
 
 shasum -a 256 "$DMG" | tee "$DMG.sha256"

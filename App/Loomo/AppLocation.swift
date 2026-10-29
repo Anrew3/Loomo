@@ -23,11 +23,16 @@ enum AppLocation {
         return original as URL
     }
 
+    /// Built from source (Xcode, scripts/build-app.sh): runs from a build folder.
+    static var isDevelopmentBuild: Bool {
+        let path = Bundle.main.bundleURL.path
+        return path.contains("/DerivedData") || path.contains("/build/") || path.contains(".noindex/")
+    }
+
     /// True when Loomo is somewhere it should be moved from: a disk image, Downloads, or a translocated copy.
     static var shouldOffer: Bool {
-        let path = Bundle.main.bundleURL.path
-        // Builds from source (Xcode, scripts/build-app.sh) run from build folders: leave those alone.
-        if path.contains("/DerivedData") || path.contains("/build/") || path.contains(".noindex/") { return false }
+        // Builds from source run from build folders: leave those alone.
+        if isDevelopmentBuild { return false }
         let original = originalBundleURL.path
         let inApplications = original.hasPrefix("/Applications/")
             || original.hasPrefix(FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Applications").path + "/")

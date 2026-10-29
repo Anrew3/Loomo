@@ -94,6 +94,12 @@
 			<string>Any</string>
 		</dict>
 	</dict>
+	<key>SUFeedURL</key>
+	<string>https://github.com/Anrew3/Loomo/releases/latest/download/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>CBjYeGyOGdOHBdxx9Y1UGDWQBwrSKvU/KBQgGiuCR+4=</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

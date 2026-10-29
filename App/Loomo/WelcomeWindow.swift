@@ -24,7 +24,7 @@ struct WelcomeView: View {
             recent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(width: 820, height: 480)
+        .frame(width: 820, height: 520)
         .background(Color(nsColor: .windowBackgroundColor))
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             recents = RecentProject.load()
@@ -57,6 +57,9 @@ struct WelcomeView: View {
                     close()
                 }
                 action("Open Existing Project…", detail: "A .loomo or .loomosys file", icon: "folder") { browse() }
+                action("Try the Sample Harness", detail: "An engine sensor harness to explore", icon: "sparkles.rectangle.stack") {
+                    openSample()
+                }
             }
             .padding(.top, 26)
             .padding(.horizontal, 28)
@@ -180,6 +183,17 @@ struct WelcomeView: View {
     }
 
     private func close() { dismissWindow(id: "welcome") }
+
+    /// Opens the bundled sample as a new, untitled harness, so exploring it never changes the original.
+    private func openSample() {
+        guard let url = Bundle.main.url(forResource: "EngineSensorHarness", withExtension: "json"),
+              let data = try? Data(contentsOf: url), let sample = try? Harness.load(from: data) else {
+            error = "The sample harness couldn't be opened."
+            return
+        }
+        newProject(.harness(sample))
+        close()
+    }
 }
 
 /// A project from the system's recent-documents list.

@@ -1,0 +1,27 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  engine:
+    name: Engine tests
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: swift test
+        working-directory: Packages/CrimpKit
+        run: swift test
+
+  app:
+    name: App build
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Loomo (unsigned)
+        run: |
+          xcodebuild -workspace Loomo.xcworkspace -scheme Loomo -configuration Debug \
+            -destination "platform=macOS" -derivedDataPath build/DerivedData.noindex \
+            CODE_SIGNING_ALLOWED=NO build

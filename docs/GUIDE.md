@@ -23,7 +23,7 @@ A system project (`.loomosys`, **File ▸ New System Project**, ⇧⌘N) holds d
 - **Wires:** select several wires (⌘-click) to twist them, make a cable, set extra length or clear overrides.
 - **Inspector:** edits whatever is selected. Every part field searches your library first, then your parts sources, and can replace a part everywhere it is used.
 - **Parts Library** (⇧⌘L): internal part numbers, alternates, strip lengths, crimp tools, wire ranges, and design configurations that fill contacts, plugs and wedgelocks automatically.
-- **Print & Export:** live PDF preview and page selection. Exports the drawing-set PDF, formboard 1:1 PDF, Excel workbook and WireViz YAML. **File ▸ Import** reads from-to wire lists.
+- **Print & Export:** live PDF preview and page selection. Exports the drawing-set PDF, formboard 1:1 PDF, Excel workbook and WireViz YAML. **File ▸ Import** reads from-to wire lists and WireViz YAML files (`crimp import-wireviz` does the same).
 
 ## Welcome window
 

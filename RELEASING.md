@@ -11,27 +11,42 @@ app with each user's own API keys, and the MCP tools run on their Mac.
 2. **Developer ID certificate.** Xcode ▸ Settings ▸ Accounts ▸ your team ▸ Manage Certificates ▸ + ▸
    **Developer ID Application**. Only the account holder can create one. It's what lets a downloaded app open
    without "unidentified developer" warnings.
-3. **Notarization credentials**, stored in your keychain once:
+3. **Update signing key.** Sparkle checks every update against the public key in `App/Resources/Info.plist`
+   (`SUPublicEDKey`). The private half lives in your login keychain; make your own with
+   `generate_keys --account loomo` (in Sparkle's `bin` folder) if you fork Loomo, and put its public key in
+   Info.plist. Back it up with `generate_keys --account loomo -x loomo-sparkle.key`: without it, existing
+   installs can't take updates.
+4. **Notarization credentials (optional)**, only for signing the disk image itself, stored in your keychain once:
    ```sh
    xcrun notarytool store-credentials loomo-notary --apple-id you@example.com --team-id TEAMID
    ```
    It asks for an app-specific password, which you make at account.apple.com ▸ Sign-In and Security.
-4. **iCloud (optional).** The first signed build registers the iCloud container `iCloud.com.loomo.Loomo` for
+5. **iCloud (optional).** The first signed build registers the iCloud container `iCloud.com.loomo.Loomo` for
    your team. If you fork Loomo under another team, change the container id in `App/Resources/*.entitlements`,
    `App/Resources/Info.plist`, `CloudDocuments.swift` and `TeamLibrary.swift`; iCloud container ids are global.
 
 ## Making a release
 
-1. Set the version: `MARKETING_VERSION` in Loomo.xcodeproj (the build number is the commit count).
+1. Set the version: `MARKETING_VERSION` in Loomo.xcodeproj (the build number follows from it: 0.4.1 is 401).
 2. Build, sign and notarize:
    ```sh
-   LOOMO_NOTARY_PROFILE=loomo-notary scripts/make-dmg.sh
+   scripts/make-dmg.sh
    ```
-   It archives a universal build (Apple silicon and Intel), signs it with Developer ID, notarizes and staples
-   the app, builds the disk image (Loomo plus an Applications shortcut), then signs, notarizes and staples the
-   image. Output: `build/dmg/Loomo-<version>.dmg` and its SHA-256.
-3. Create a GitHub release for the tag (`git tag v0.5.0 && git push --tags`), attach the DMG, and paste the
-   SHA-256 into the notes.
+   It archives a universal build (Apple silicon and Intel), signs it with Developer ID through Xcode's account,
+   notarizes and staples the app, and builds the disk image (Loomo plus an Applications shortcut). It then signs
+   the image for Sparkle and writes `appcast.xml`. With `LOOMO_NOTARY_PROFILE` and a local Developer ID
+   certificate it signs and notarizes the image too. Output: `build/dmg/Loomo-<version>.dmg`, `appcast.xml`
+   and the SHA-256.
+3. Create a GitHub release for the tag `v<version>` and attach **both** the DMG and `appcast.xml`. Installed
+   copies read `releases/latest/download/appcast.xml`, so an update reaches people as soon as it's the latest
+   release.
+
+### From GitHub Actions
+
+`.github/workflows/release.yml` does all of this when you push a tag (`git tag v0.5.0 && git push origin v0.5.0`).
+It needs these repository secrets: `TEAM_ID`; an App Store Connect API key with the Admin role (`ASC_KEY_P8`, the
+.p8 file's contents, plus `ASC_KEY_ID` and `ASC_ISSUER_ID`), which signs with the cloud-managed Developer ID
+certificate and notarizes; and `SPARKLE_PRIVATE_KEY`, the exported update key.
 
 `scripts/make-dmg.sh --test` builds the same disk image unsigned, to check the layout locally. Don't publish it:
 on other Macs, Gatekeeper blocks it. `LOOMO_DMG_LAYOUT=1` arranges the DMG window (it scripts Finder, which
@@ -50,10 +65,7 @@ macOS asks permission for once).
 
 ## Later
 
-- **Automatic updates.** [Sparkle](https://sparkle-project.org) is the standard for apps distributed outside
-  the App Store: it reads an appcast feed (which can live in GitHub Releases) and installs signed updates.
-- **CI releases.** A GitHub Actions workflow can run `make-dmg.sh` on a macOS runner from a tag. It needs the
-  Developer ID certificate (exported as a .p12) and an App Store Connect API key as repository secrets.
+- **Delta updates.** Sparkle can ship small binary diffs between versions with `generate_appcast`.
 
 ## Mac App Store (optional)
 

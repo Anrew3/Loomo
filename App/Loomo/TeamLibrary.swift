@@ -228,6 +228,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSDocumentController.shared.autosavingDelay = 30
         Task { @MainActor in
             SettingsSync.shared.start()
+            AppUpdater.shared.start()
+            WhatsNew.showIfUpdated()
             // Run from the disk image or Downloads: offer to move into Applications first.
             AppLocation.offerMove()
         }

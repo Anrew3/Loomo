@@ -11,6 +11,7 @@ let usage = """
 crimp: edit and check Loomo harness files. Output is JSON.
 
   crimp new <file> [--name N] [--revision A] [--units metric|imperial] [--allowance 20mm]
+  crimp import-wireviz <file> --from harness.yml   New harness from a WireViz YAML file
   crimp info <file>                    Everything in the harness, with computed wire lengths
   crimp validate <file>                Rule check; exit 1 when there are errors
   crimp set <file> [--name N] [--revision A] [--units metric|imperial] [--allowance LEN]
@@ -276,6 +277,20 @@ case "new":
     if let a = args.length("allowance") { h.settings.terminationAllowanceMM = a }
     save(h, path)
     emit(["ok": true, "file": path, "name": h.name])
+
+case "import-wireviz":
+    let path = file()
+    if FileManager.default.fileExists(atPath: path) { fail("\(path) already exists") }
+    guard let source = args["from"] else { fail("Give the WireViz file with --from harness.yml") }
+    guard let text = try? String(contentsOfFile: source, encoding: .utf8) else { fail("Can't read \(source)") }
+    do {
+        let (h, report) = try WireVizImport.harness(fromYAML: text, name: URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent)
+        save(h, path)
+        emit(["ok": true, "file": path, "connectors": report.connectors, "splices": report.splices, "wires": report.wires,
+              "skipped": report.skipped])
+    } catch {
+        fail(error.localizedDescription)
+    }
 
 case "info":
     emit(info(load(file())))

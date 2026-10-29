@@ -9,7 +9,7 @@ final class LoomoUITests: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         // No restored windows, no tips, no setup assistant; each test starts from a new, empty harness.
-        app.launchArguments += ["-ApplePersistenceIgnoreState", "YES", "-UITests", "-setup.completed", "YES"]
+        app.launchArguments += ["-ApplePersistenceIgnoreState", "YES", "-UITests", "YES", "-setup.completed", "YES"]
         app.launch()
         app.activate()
         let newHarness = app.buttons["welcome.New Harness"].firstMatch
@@ -46,7 +46,10 @@ final class LoomoUITests: XCTestCase {
 
     func testBillOfMaterialsOpens() {
         app.descendants(matching: .any)["sidebar.Bill of Materials"].firstMatch.click()
-        XCTAssertTrue(app.tables.firstMatch.waitForExistence(timeout: 5))
+        // SwiftUI tables appear to accessibility as a table or an outline, depending on the macOS version.
+        let table = app.descendants(matching: .any).matching(NSPredicate(format: "elementType == %d OR elementType == %d",
+            XCUIElement.ElementType.table.rawValue, XCUIElement.ElementType.outline.rawValue)).firstMatch
+        XCTAssertTrue(table.waitForExistence(timeout: 5), "No BOM table:\n\(app.debugDescription.prefix(2000))")
     }
 
     func testRuleCheckerOpens() {

@@ -31,6 +31,7 @@ struct LoomoApp: App {
                 .environmentObject(library)
                 .modifier(LiveRegistration(doc: file.document, url: file.fileURL))
                 .frame(minWidth: 1180, minHeight: 720)
+                .opensFullScreen()
                 .onAppear { RecentProject.note(file.fileURL) }
                 .onChange(of: file.fileURL) { RecentProject.note(file.fileURL) }
         }
@@ -57,6 +58,7 @@ struct LoomoApp: App {
             SystemContentView(doc: file.document)
                 .environmentObject(library)
                 .frame(minWidth: 1180, minHeight: 720)
+                .opensFullScreen()
                 .onAppear { RecentProject.note(file.fileURL) }
                 .onChange(of: file.fileURL) { RecentProject.note(file.fileURL) }
         }
@@ -104,6 +106,9 @@ struct CrimpCommands: Commands {
     @Environment(\.openWindow) private var openWindow
 
     var body: some Commands {
+        CommandGroup(after: .appInfo) {
+            CheckForUpdatesButton()
+        }
         CommandGroup(after: .help) {
             Button("Diagnostic Reports") { openWindow(id: "diagnostics") }
         }
@@ -130,9 +135,9 @@ struct CrimpCommands: Commands {
         }
         CommandGroup(replacing: .importExport) {
             Menu("Import") {
-                Button("Wire List (CSV)…") { doc?.importWireList() }
+                Button("Wire List (CSV)…") { doc?.importWireList() }.disabled(doc == nil)
+                Button("WireViz YAML as New Harness…") { WireVizImporter.run() }
             }
-            .disabled(doc == nil)
             Menu("Export") {
                 Button("Drawing Set (PDF)…") { doc?.exportPDF() }.keyboardShortcut("e")
                 Button("Formboard 1:1 (PDF)…") { doc?.exportFormboard() }
@@ -295,6 +300,7 @@ struct SettingsView: View {
     @AppStorage("defaultUnits") private var defaultUnits = UnitSystem.metric.rawValue
     @AppStorage(AppAppearance.key) private var appearance = AppAppearance.system.rawValue
     @AppStorage("partsProvider") private var providerRaw = PartsProvider.auto.rawValue
+    @AppStorage(FullScreenWindows.key) private var openFullScreen = true
     @State private var usage: [String: ProviderUsage] = [:]
 
     var body: some View {
@@ -334,6 +340,10 @@ struct SettingsView: View {
                 }
                 .pickerStyle(.segmented)
                 .onChange(of: appearance) { AppAppearance.apply() }
+            }
+            UpdateSettings()
+            Section("Windows") {
+                Toggle("Open projects in full screen", isOn: $openFullScreen)
             }
             Section("New harnesses") {
                 Picker("Units", selection: $defaultUnits) {

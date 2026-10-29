@@ -1,0 +1,1028 @@
+{
+  "acceptedIssues" : [
+
+  ],
+  "annotations" : [
+
+  ],
+  "bomExcluded" : [
+
+  ],
+  "bomExtraLines" : [
+
+  ],
+  "bomQuantityOverrides" : {
+
+  },
+  "cables" : [
+
+  ],
+  "connectors" : [
+    {
+      "accessories" : [
+
+      ],
+      "backshellEntryMM" : 0,
+      "boxItems" : [
+
+      ],
+      "cavities" : [
+        {
+          "label" : "1",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "2"
+        },
+        {
+          "label" : "3",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "4",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "5",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "6",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "7",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "8",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "9",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "10",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "11"
+        },
+        {
+          "label" : "12"
+        }
+      ],
+      "gender" : "female",
+      "id" : "C1",
+      "insertionDepthMM" : 0,
+      "kind" : "housing",
+      "name" : "ECU",
+      "nodeID" : "N1",
+      "notes" : "",
+      "part" : {
+        "alternates" : [
+
+        ],
+        "isGeneric" : false,
+        "manufacturer" : "TE Connectivity \/ Deutsch",
+        "mpn" : "DT06-12S",
+        "positionCount" : 12
+      },
+      "sealed" : false
+    },
+    {
+      "accessories" : [
+
+      ],
+      "backshellEntryMM" : 0,
+      "boxItems" : [
+
+      ],
+      "cavities" : [
+        {
+          "label" : "1",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "2",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "3",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        }
+      ],
+      "gender" : "female",
+      "id" : "C2",
+      "insertionDepthMM" : 0,
+      "kind" : "housing",
+      "name" : "MAP Sensor",
+      "nodeID" : "N2",
+      "notes" : "",
+      "part" : {
+        "alternates" : [
+
+        ],
+        "isGeneric" : false,
+        "manufacturer" : "TE Connectivity \/ Deutsch",
+        "mpn" : "DT06-3S",
+        "positionCount" : 3
+      },
+      "sealed" : false
+    },
+    {
+      "accessories" : [
+        {
+          "kind" : "wedgelock",
+          "part" : {
+            "alternates" : [
+
+            ],
+            "description" : "DT wedgelock, 2-way",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "mpn" : "W2S"
+          },
+          "quantity" : 1
+        }
+      ],
+      "backshellEntryMM" : 0,
+      "boxItems" : [
+
+      ],
+      "cavities" : [
+        {
+          "label" : "1",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "2",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        }
+      ],
+      "gender" : "female",
+      "id" : "C3",
+      "insertionDepthMM" : 0,
+      "kind" : "housing",
+      "name" : "Coolant Temp",
+      "nodeID" : "N3",
+      "notes" : "",
+      "part" : {
+        "alternates" : [
+
+        ],
+        "description" : "DT plug, 2-way",
+        "isGeneric" : false,
+        "manufacturer" : "TE Connectivity \/ Deutsch",
+        "mpn" : "DT06-2S",
+        "positionCount" : 2
+      },
+      "sealed" : false
+    },
+    {
+      "accessories" : [
+
+      ],
+      "backshellEntryMM" : 0,
+      "boxItems" : [
+
+      ],
+      "cavities" : [
+        {
+          "label" : "1",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "2",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        },
+        {
+          "label" : "3",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Socket contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0462-201-16141"
+          }
+        }
+      ],
+      "gender" : "female",
+      "id" : "C4",
+      "insertionDepthMM" : 0,
+      "kind" : "housing",
+      "name" : "Oil Pressure",
+      "nodeID" : "N4",
+      "notes" : "",
+      "part" : {
+        "alternates" : [
+
+        ],
+        "isGeneric" : false,
+        "manufacturer" : "TE Connectivity \/ Deutsch",
+        "mpn" : "DT06-3S",
+        "positionCount" : 3
+      },
+      "sealed" : false
+    },
+    {
+      "accessories" : [
+        {
+          "kind" : "wedgelock",
+          "part" : {
+            "alternates" : [
+
+            ],
+            "description" : "DT wedgelock, 4-way",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "mpn" : "W4P"
+          },
+          "quantity" : 1
+        }
+      ],
+      "backshellEntryMM" : 0,
+      "boxItems" : [
+
+      ],
+      "cavities" : [
+        {
+          "label" : "1",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Pin contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0460-202-16141"
+          }
+        },
+        {
+          "label" : "2",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Pin contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0460-202-16141"
+          }
+        },
+        {
+          "label" : "3",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "Pin contact, size 16, 16-20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0460-202-16141"
+          }
+        },
+        {
+          "label" : "4",
+          "plug" : {
+            "alternates" : [
+
+            ],
+            "description" : "DT sealing plug, size 16",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "mpn" : "114017"
+          },
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "crimpTool" : "HDT-48-00",
+            "description" : "DT pin contact, size 16, 16–20 AWG",
+            "isGeneric" : false,
+            "manufacturer" : "TE Connectivity \/ Deutsch",
+            "maxWireMM2" : 1.5,
+            "minWireMM2" : 0.5,
+            "mpn" : "0460-202-16141",
+            "stripLengthMM" : 6
+          }
+        }
+      ],
+      "gender" : "male",
+      "id" : "C5",
+      "insertionDepthMM" : 0,
+      "kind" : "housing",
+      "name" : "Power In",
+      "nodeID" : "N5",
+      "notes" : "",
+      "part" : {
+        "alternates" : [
+
+        ],
+        "description" : "DT receptacle, 4-way",
+        "isGeneric" : false,
+        "manufacturer" : "TE Connectivity \/ Deutsch",
+        "mpn" : "DT04-4P",
+        "positionCount" : 4
+      },
+      "sealed" : false
+    },
+    {
+      "accessories" : [
+
+      ],
+      "backshellEntryMM" : 0,
+      "boxItems" : [
+
+      ],
+      "cavities" : [
+        {
+          "label" : "1",
+          "terminal" : {
+            "alternates" : [
+
+            ],
+            "description" : "M6 ring terminal, 14-16 AWG",
+            "isGeneric" : true,
+            "manufacturer" : "—",
+            "mpn" : "GENERIC"
+          }
+        }
+      ],
+      "gender" : "female",
+      "id" : "T1",
+      "insertionDepthMM" : 0,
+      "kind" : "ringTerminal",
+      "name" : "Chassis Ground",
+      "nodeID" : "N6",
+      "notes" : "",
+      "part" : {
+        "alternates" : [
+
+        ],
+        "description" : "M6 ring terminal, 14-16 AWG",
+        "isGeneric" : true,
+        "manufacturer" : "—",
+        "mpn" : "GENERIC"
+      },
+      "sealed" : false
+    }
+  ],
+  "coverings" : [
+
+  ],
+  "labels" : [
+
+  ],
+  "name" : "Engine Sensor Harness",
+  "nodes" : [
+    {
+      "id" : "N1",
+      "kind" : "connector",
+      "label" : "C1",
+      "position" : {
+        "x" : 140,
+        "y" : 360
+      }
+    },
+    {
+      "id" : "N2",
+      "kind" : "connector",
+      "label" : "C2",
+      "position" : {
+        "x" : 1000,
+        "y" : 170
+      }
+    },
+    {
+      "id" : "N3",
+      "kind" : "connector",
+      "label" : "C3",
+      "position" : {
+        "x" : 1040,
+        "y" : 360
+      }
+    },
+    {
+      "id" : "N4",
+      "kind" : "connector",
+      "label" : "C4",
+      "position" : {
+        "x" : 1000,
+        "y" : 550
+      }
+    },
+    {
+      "id" : "N5",
+      "kind" : "connector",
+      "label" : "C5",
+      "position" : {
+        "x" : 140,
+        "y" : 640
+      }
+    },
+    {
+      "id" : "N6",
+      "kind" : "connector",
+      "label" : "T1",
+      "position" : {
+        "x" : 560,
+        "y" : 700
+      }
+    },
+    {
+      "id" : "N7",
+      "kind" : "splice",
+      "label" : "SP1",
+      "position" : {
+        "x" : 560,
+        "y" : 360
+      }
+    },
+    {
+      "id" : "N8",
+      "kind" : "breakout",
+      "label" : "BO1",
+      "position" : {
+        "x" : 800,
+        "y" : 360
+      }
+    }
+  ],
+  "notes" : [
+
+  ],
+  "revision" : "B",
+  "revisions" : [
+
+  ],
+  "schemaVersion" : 3,
+  "segments" : [
+    {
+      "id" : "S1",
+      "lengthMM" : 609.6,
+      "nodeA" : "N1",
+      "nodeB" : "N7"
+    },
+    {
+      "id" : "S2",
+      "lengthMM" : 203.2,
+      "nodeA" : "N7",
+      "nodeB" : "N8"
+    },
+    {
+      "id" : "S3",
+      "lengthMM" : 355.6,
+      "nodeA" : "N8",
+      "nodeB" : "N2"
+    },
+    {
+      "id" : "S4",
+      "lengthMM" : 254,
+      "nodeA" : "N8",
+      "nodeB" : "N3"
+    },
+    {
+      "id" : "S5",
+      "lengthMM" : 355.6,
+      "nodeA" : "N8",
+      "nodeB" : "N4"
+    },
+    {
+      "id" : "S6",
+      "lengthMM" : 457.2,
+      "nodeA" : "N5",
+      "nodeB" : "N7"
+    },
+    {
+      "id" : "S7",
+      "lengthMM" : 304.8,
+      "nodeA" : "N7",
+      "nodeB" : "N6"
+    }
+  ],
+  "settings" : {
+    "bundlePackingFactor" : 1.2,
+    "cutLengthRoundingMM" : 5,
+    "gridSize" : 10,
+    "materialMarginPercent" : 5,
+    "snapToGrid" : true,
+    "terminationAllowanceMM" : 20,
+    "units" : "imperial"
+  },
+  "splices" : [
+    {
+      "id" : "SP1",
+      "kind" : "ultrasonic",
+      "nodeID" : "N7"
+    }
+  ],
+  "titleBlock" : {
+    "approvedBy" : "",
+    "checkedBy" : "",
+    "company" : "",
+    "drawingNumber" : "",
+    "drawnBy" : "",
+    "sheetSize" : "a3"
+  },
+  "tools" : [
+
+  ],
+  "twists" : [
+
+  ],
+  "wires" : [
+    {
+      "color" : {
+        "base" : "RD",
+        "stripe" : "WH"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "1",
+          "connector" : "C1"
+        }
+      },
+      "id" : "W1",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "5V REF",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "splice" : "SP1"
+      }
+    },
+    {
+      "color" : {
+        "base" : "RD",
+        "stripe" : "WH"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "splice" : "SP1"
+      },
+      "id" : "W2",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "5V REF",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "1",
+          "connector" : "C2"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "RD",
+        "stripe" : "WH"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "splice" : "SP1"
+      },
+      "id" : "W3",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "5V REF",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "1",
+          "connector" : "C4"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "GN"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "3",
+          "connector" : "C1"
+        }
+      },
+      "id" : "W4",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "MAP_SIG",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "2",
+          "connector" : "C2"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "BK",
+        "stripe" : "WH"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "8",
+          "connector" : "C1"
+        }
+      },
+      "id" : "W5",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "SIG_GND",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "3",
+          "connector" : "C2"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "YE"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "4",
+          "connector" : "C1"
+        }
+      },
+      "id" : "W6",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "ECT_SIG",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "1",
+          "connector" : "C3"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "BK",
+        "stripe" : "WH"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "5",
+          "connector" : "C1"
+        }
+      },
+      "id" : "W7",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "SIG_GND",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "2",
+          "connector" : "C3"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "BU"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "6",
+          "connector" : "C1"
+        }
+      },
+      "id" : "W8",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "OIL_SIG",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "2",
+          "connector" : "C4"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "BK",
+        "stripe" : "WH"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "7",
+          "connector" : "C1"
+        }
+      },
+      "id" : "W9",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.32,
+      "role" : "conductor",
+      "signal" : "SIG_GND",
+      "size" : {
+        "awg" : 20,
+        "crossSectionMM2" : 0.52
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "3",
+          "connector" : "C4"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "RD"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "1",
+          "connector" : "C5"
+        }
+      },
+      "id" : "W10",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.8,
+      "role" : "conductor",
+      "signal" : "BATT",
+      "size" : {
+        "awg" : 16,
+        "crossSectionMM2" : 1.31
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "9",
+          "connector" : "C1"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "OG"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "3",
+          "connector" : "C5"
+        }
+      },
+      "id" : "W11",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.55,
+      "role" : "conductor",
+      "signal" : "IGN",
+      "size" : {
+        "awg" : 18,
+        "crossSectionMM2" : 0.82
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "10",
+          "connector" : "C1"
+        }
+      }
+    },
+    {
+      "color" : {
+        "base" : "BK"
+      },
+      "extraLengthMM" : 0,
+      "from" : {
+        "pin" : {
+          "cavity" : "2",
+          "connector" : "C5"
+        }
+      },
+      "id" : "W12",
+      "insulation" : "TXL",
+      "outerDiameterMM" : 1.8,
+      "role" : "conductor",
+      "signal" : "GND",
+      "size" : {
+        "awg" : 16,
+        "crossSectionMM2" : 1.31
+      },
+      "to" : {
+        "pin" : {
+          "cavity" : "1",
+          "connector" : "T1"
+        }
+      }
+    }
+  ]
+}

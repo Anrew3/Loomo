@@ -1,0 +1,55 @@
+name: Release
+
+# Push a tag such as v0.5.0 to build, sign, notarize and publish the DMG and the Sparkle appcast.
+# Repository secrets (Settings ▸ Secrets and variables ▸ Actions):
+#   TEAM_ID              Apple Developer Team ID
+#   ASC_KEY_P8           App Store Connect API key (Admin role), the .p8 file's contents
+#   ASC_KEY_ID           that key's Key ID
+#   ASC_ISSUER_ID        the Issuer ID shown above the keys list
+#   SPARKLE_PRIVATE_KEY  the update-signing key: generate_keys --account loomo -x key.txt, then the file's contents
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: |
+          # Skip when the secrets aren't set up, or when the release was already published from a Mac.
+          if [ -z "$TEAM_ID" ]; then echo "No signing secrets; skipping."; echo "skip=true" >> "$GITHUB_OUTPUT"
+          elif gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then echo "Already released."; echo "skip=true" >> "$GITHUB_OUTPUT"
+          else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Build, sign and notarize
+        if: steps.check.outputs.skip == 'false'
+        env:
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+          LOOMO_ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          LOOMO_ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+          LOOMO_REPO: ${{ github.repository }}
+        run: |
+          printf 'DEVELOPMENT_TEAM = %s\nLOOMO_ICLOUD_SUFFIX =\n' "$TEAM_ID" > Config/Local.xcconfig
+          export LOOMO_ASC_KEY_PATH="$RUNNER_TEMP/asc.p8"
+          printf '%s' "$ASC_KEY_P8" > "$LOOMO_ASC_KEY_PATH"
+          export DEVELOPER_DIR="$(xcode-select -p)"
+          scripts/make-dmg.sh
+      - name: Publish the release
+        if: steps.check.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          DMG="$(ls build/dmg/Loomo-*.dmg)"
+          SHA="$(shasum -a 256 "$DMG" | cut -d' ' -f1)"
+          printf 'Download **%s** below, open it and drag Loomo to Applications.\n\nSHA-256 `%s`\n' "$(basename "$DMG")" "$SHA" > notes.md
+          gh release create "$GITHUB_REF_NAME" "$DMG" build/dmg/appcast.xml --title "Loomo ${GITHUB_REF_NAME#v}" --notes-file notes.md --latest

@@ -47,6 +47,8 @@ Draw the harness, and Loomo works out the wire lengths, bill of materials, cut l
 - **AI editing:** Claude and other MCP clients edit the open harness live. Every edit is one undo step.
 - **iCloud:** projects on all your Macs, plus a shared team parts library.
 - **Command line:** the `crimp` tool scripts everything the app can do.
+- **WireViz import and export:** bring in WireViz YAML files, or write them out.
+- **Automatic updates:** Loomo checks for new versions and installs them for you.
 
 ## Install
 
@@ -66,7 +68,8 @@ On first launch, a short setup assistant offers three optional steps:
 | **iCloud** | New projects save to iCloud Drive and autosave. |
 | **Claude** | One click connects Claude Desktop. Then ask it to "add a 4-way Deutsch connector and wire it to C1". |
 
-Then press **⌘N** to start a harness and **C** to place a connector.
+Then press **⌘N** to start a harness and **C** to place a connector, or choose **Try the Sample Harness** in the
+welcome window to explore a finished one.
 
 ## Build from source
 
@@ -90,6 +93,7 @@ crimp add-connector bench.loomo --mpn DT04-2P --manufacturer "TE Connectivity" -
 crimp add-wire bench.loomo --from C1:1 --to C2:1 --size 18awg --color red
 crimp validate bench.loomo
 crimp pdf bench.loomo --out bench.pdf
+crimp import-wireviz serial.loomo --from serial.yml
 ```
 
 `crimp` ships inside the app at `Loomo.app/Contents/MacOS/crimp`. The [guide](docs/GUIDE.md) covers every

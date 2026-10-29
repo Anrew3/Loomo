@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A11E0000000000000000001 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 5A11E0000000000000000002 /* Sparkle */; };
 		05F597EAE45DFCAB5778F2A1 /* CrimpCore in Frameworks */ = {isa = PBXBuildFile; productRef = BD23E80C8791DF18FFA41B46 /* CrimpCore */; };
 		38756BE2661C318915203C71 /* CrimpOutputs in Frameworks */ = {isa = PBXBuildFile; productRef = 9E379EEAFC368E83FD25D2DB /* CrimpOutputs */; };
 		0B12E2A9A655FA373C2C8202 /* PartsClient in Frameworks */ = {isa = PBXBuildFile; productRef = ED4FD135F5682DD256FE20A4 /* PartsClient */; };
@@ -94,6 +95,7 @@
 				05F597EAE45DFCAB5778F2A1 /* CrimpCore in Frameworks */,
 				38756BE2661C318915203C71 /* CrimpOutputs in Frameworks */,
 				0B12E2A9A655FA373C2C8202 /* PartsClient in Frameworks */,
+				5A11E0000000000000000001 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +178,7 @@
 				BD23E80C8791DF18FFA41B46 /* CrimpCore */,
 				9E379EEAFC368E83FD25D2DB /* CrimpOutputs */,
 				ED4FD135F5682DD256FE20A4 /* PartsClient */,
+				5A11E0000000000000000002 /* Sparkle */,
 			);
 			productName = Loomo;
 			productReference = B04245853D60726EFA93EBB6 /* Loomo.app */;
@@ -288,6 +291,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				9936E04123543D6A7BFD000C /* XCLocalSwiftPackageReference "Packages/CrimpKit" */,
+				5A11E0000000000000000003 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D4709D6ED2D726A5CB393DEC /* Products */;
@@ -511,7 +515,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo;
 				PRODUCT_NAME = Loomo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -534,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo;
 				PRODUCT_NAME = Loomo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -555,7 +559,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Thumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -576,7 +580,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Thumbnail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -597,7 +601,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Preview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -618,7 +622,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Preview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -631,7 +635,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.LoomoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = Loomo;
@@ -644,7 +648,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.LoomoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = Loomo;
@@ -708,7 +712,23 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		5A11E0000000000000000003 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		5A11E0000000000000000002 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5A11E0000000000000000003 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
 		BD23E80C8791DF18FFA41B46 /* CrimpCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CrimpCore;

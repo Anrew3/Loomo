@@ -4,9 +4,9 @@
 
 # Loomo
 
-**Wire harness design for the Mac.**
+**A free, open source Mac app for designing wire harnesses.**
 
-Draw the harness, and Loomo works out the wire lengths, bill of materials, cut list and drawings.
+You draw the harness, and Loomo figures out the wire lengths, parts list, cut list and drawings for you.
 
 [![macOS 26](https://img.shields.io/badge/macOS-26-black?logo=apple)](#install)
 [![Swift 6](https://img.shields.io/badge/Swift-6-F05138?logo=swift&logoColor=white)](https://swift.org)
@@ -19,6 +19,20 @@ Draw the harness, and Loomo works out the wire lengths, bill of materials, cut l
 <img src="docs/images/drawing.jpg" width="900" alt="Loomo showing a harness drawing with connectors, a splice and bundle lengths">
 
 </div>
+
+## What is this?
+
+A wire harness is the bundle of wires, connectors and terminals that ties the electrical parts of a car, a
+machine or a robot together. Designing one usually means juggling a CAD drawing, a pinout spreadsheet and a
+parts list, and keeping all three in sync by hand.
+
+Loomo puts that in one place. You place your connectors, run wires between pins, and lay out how the bundles
+branch. From there it works out how long every wire needs to be, checks your design for mistakes (wrong wire
+size for a terminal, a missing seal, two wires in one cavity), and makes everything you need to build it: a
+bill of materials, a cut list, connection tables, labels, a printable drawing set and a 1:1 formboard.
+
+It's built for anyone making harnesses, whether that's a one-off for a project car or something going to a
+shop for production.
 
 ## Screenshots
 
@@ -37,30 +51,35 @@ Draw the harness, and Loomo works out the wire lengths, bill of materials, cut l
 
 ## Features
 
-- **Topology drawing:** connectors, splices, breakouts and bundles. Wire lengths come from the layout.
-- **Pinouts and wiring:** cavity grids, wires, cables, twists, seals, plugs and coverings.
-- **Rule checks:** catch wire-size, terminal, seal and routing problems while you design.
-- **Manufacturing outputs:** BOM, cut list, connection tables, labels, a PDF drawing set, a 1:1 formboard and
-  an Excel workbook.
-- **Parts search:** Mouser, Digi-Key, TrustedParts, OEMsecrets and Octopart, with your own free API keys.
-- **System projects:** devices and several harnesses, with signal tracing across them.
-- **AI editing:** Claude and other MCP clients edit the open harness live. Every edit is one undo step.
-- **iCloud:** projects on all your Macs, plus a shared team parts library.
-- **Command line:** the `crimp` tool scripts everything the app can do.
-- **WireViz import and export:** bring in WireViz YAML files, or write them out.
-- **Automatic updates:** Loomo checks for new versions and installs them for you.
+- **Draw the layout.** Connectors, splices, breakouts and bundles. Wire lengths come straight from the drawing.
+- **Pinouts and wiring.** Cavity grids for every connector, plus wires, cables, twisted pairs, seals, plugs
+  and coverings.
+- **Catches mistakes early.** Rule checks flag wire-size, terminal, seal and routing problems as you go.
+- **Everything for the build.** BOM, cut list, connection tables, labels, a PDF drawing set, a 1:1 formboard
+  and an Excel workbook.
+- **Real parts.** Search Mouser, Digi-Key, TrustedParts, OEMsecrets and Octopart for parts, photos and
+  prices. You use your own free API keys, so nothing goes through a server of mine.
+- **Bigger projects.** Put devices and several harnesses in one system project and trace a signal across all
+  of them.
+- **Works with Claude.** Claude, or any app that speaks MCP, can edit the harness you have open while you
+  watch. Every change it makes is one undo away.
+- **iCloud.** Your projects on all your Macs, and a parts library you can share with your team.
+- **Command line.** The `crimp` tool can do anything the app can, so you can script it.
+- **WireViz.** Open your existing WireViz files, or export to them (more below).
+- **Stays up to date.** Loomo checks for new versions and installs them for you.
 
 ## Install
 
 1. Download the latest **Loomo.dmg** from [Releases](https://github.com/Anrew3/Loomo/releases).
 2. Open it and drag **Loomo** to **Applications**.
-3. Open Loomo. It's signed and notarized, so macOS opens it normally.
+3. Open Loomo. It's signed and notarized by Apple, so you won't get any scary warnings.
 
 Requires macOS 26 on Apple silicon or Intel.
 
 ## Quick start
 
-On first launch, a short setup assistant offers three optional steps:
+The first time you open Loomo, a quick setup walks you through three things. They're all optional, and you
+can skip any of them and come back later.
 
 | Step | What it does |
 |---|---|
@@ -68,8 +87,8 @@ On first launch, a short setup assistant offers three optional steps:
 | **iCloud** | New projects save to iCloud Drive and autosave. |
 | **Claude** | One click connects Claude Desktop. Then ask it to "add a 4-way Deutsch connector and wire it to C1". |
 
-Then press **⌘N** to start a harness and **C** to place a connector, or choose **Try the Sample Harness** in the
-welcome window to explore a finished one.
+After that, press **⌘N** to start a harness and **C** to drop in a connector. If you'd rather poke around a
+finished design first, click **Try the Sample Harness** in the welcome window.
 
 ## Build from source
 
@@ -99,6 +118,25 @@ crimp import-wireviz serial.loomo --from serial.yml
 `crimp` ships inside the app at `Loomo.app/Contents/MacOS/crimp`. The [guide](docs/GUIDE.md) covers every
 command and the MCP tools.
 
+## WireViz
+
+[WireViz](https://github.com/wireviz/WireViz) is a popular open source Python tool where you describe a
+harness in a YAML text file and it draws the wiring diagram for you. Loomo works with it both ways:
+
+- **Bring WireViz files in.** File ▸ Import ▸ WireViz YAML as New Harness… turns a `.yml` file into a
+  Loomo harness, with its connectors, pin labels, part numbers, wire gauges and colors. From the command line:
+  `crimp import-wireviz harness.loomo --from harness.yml`.
+- **Send harnesses out.** File ▸ Export ▸ WireViz YAML… writes a file WireViz can render, so you can keep using
+  its diagrams in your docs:
+
+  ```bash
+  pip install wireviz
+  wireviz harness.yml
+  ```
+
+So if you've already got harnesses written for WireViz, you don't have to start over. Open them in Loomo, lay
+out the bundles, and get real wire lengths and build documents out of them.
+
 ## Documentation
 
 - [Guide](docs/GUIDE.md): the app in detail, the CLI, Claude and MCP, iCloud, tests and project layout
@@ -108,7 +146,8 @@ command and the MCP tools.
 
 ## Contributing
 
-Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Found a bug or have an idea? Open an issue. Pull requests are welcome too; see
+[CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
 ## License
 

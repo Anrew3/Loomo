@@ -191,7 +191,8 @@ struct WelcomeView: View {
             error = "The sample harness couldn't be opened."
             return
         }
-        newProject(.harness(sample))
+        // Untitled, even with iCloud on: exploring the sample shouldn't leave copies in iCloud Drive.
+        newDocument { HarnessDocument(harness: sample) }
         close()
     }
 }

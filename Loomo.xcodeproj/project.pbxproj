@@ -1,0 +1,743 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05F597EAE45DFCAB5778F2A1 /* CrimpCore in Frameworks */ = {isa = PBXBuildFile; productRef = BD23E80C8791DF18FFA41B46 /* CrimpCore */; };
+		38756BE2661C318915203C71 /* CrimpOutputs in Frameworks */ = {isa = PBXBuildFile; productRef = 9E379EEAFC368E83FD25D2DB /* CrimpOutputs */; };
+		0B12E2A9A655FA373C2C8202 /* PartsClient in Frameworks */ = {isa = PBXBuildFile; productRef = ED4FD135F5682DD256FE20A4 /* PartsClient */; };
+		4C03D0B826D441B4FF4C7314 /* CrimpCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3E82EC7996242466E3D235 /* CrimpCore */; };
+		F21258DA5FAD06AD3F25CBEB /* CrimpOutputs in Frameworks */ = {isa = PBXBuildFile; productRef = 75DCD12ECEBAEE0DA8FA2E8B /* CrimpOutputs */; };
+		A3CEB90F31A8DDBB07EADFFA /* LoomoThumbnail.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 602A9C50D5E174610B7C8179 /* LoomoThumbnail.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8A7B4691FF9DF3D108DCF2C0 /* CrimpCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7BB6F6785D6B8E0B7E1428F2 /* CrimpCore */; };
+		59ACF0F5ACB5B0E7F3D91D17 /* CrimpOutputs in Frameworks */ = {isa = PBXBuildFile; productRef = 78F36C7F39436C047D014BC5 /* CrimpOutputs */; };
+		64614A9BF3EC1C82A689EDB7 /* LoomoPreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8D82A01546D8E343E48A2475 /* LoomoPreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C0FF1CE0000000000000A001 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Signing.xcconfig; sourceTree = "<group>"; };
+		B04245853D60726EFA93EBB6 /* Loomo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Loomo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		41F255E551EF8D919C1603F1 /* Loomo.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Loomo.xctestplan; sourceTree = "<group>"; };
+		602A9C50D5E174610B7C8179 /* LoomoThumbnail.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LoomoThumbnail.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D82A01546D8E343E48A2475 /* LoomoPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LoomoPreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		953E1D3583371762F27CADC1 /* LoomoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoomoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		63A8B0263D6110FBF466AA60 /* Exceptions for "App" folder in "Loomo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Loomo.entitlements,
+				Resources/Info.plist,
+			);
+			target = 64AE383333F1B43E02224D59 /* Loomo */;
+		};
+		29D4EF1787ECB4F2A6DAE0F8 /* Exceptions for "Extensions/Thumbnail" folder in "LoomoThumbnail" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Thumbnail.entitlements,
+				Info.plist,
+			);
+			target = F70CB4209D993D092F0EDA4F /* LoomoThumbnail */;
+		};
+		2732BECCFD1E704A9FCAAE34 /* Exceptions for "Extensions/Preview" folder in "LoomoPreview" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Preview.entitlements,
+				Info.plist,
+			);
+			target = C6925EA02CA51CCA7A397BFF /* LoomoPreview */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		45B6D19B44F94E557ADA9AB0 /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				63A8B0263D6110FBF466AA60 /* Exceptions for "App" folder in "Loomo" target */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		978C4A6E629122A00C2B2062 /* Extensions/Thumbnail */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				29D4EF1787ECB4F2A6DAE0F8 /* Exceptions for "Extensions/Thumbnail" folder in "LoomoThumbnail" target */,
+			);
+			path = Extensions/Thumbnail;
+			sourceTree = "<group>";
+		};
+		EDBEABBAC8831610FF42E473 /* Extensions/Preview */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2732BECCFD1E704A9FCAAE34 /* Exceptions for "Extensions/Preview" folder in "LoomoPreview" target */,
+			);
+			path = Extensions/Preview;
+			sourceTree = "<group>";
+		};
+		02EED70AE30D9F57DF5AEBCB /* UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		351E6F5611328E6D3FA6844B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F597EAE45DFCAB5778F2A1 /* CrimpCore in Frameworks */,
+				38756BE2661C318915203C71 /* CrimpOutputs in Frameworks */,
+				0B12E2A9A655FA373C2C8202 /* PartsClient in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0098389DE7B9E21B79364733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C03D0B826D441B4FF4C7314 /* CrimpCore in Frameworks */,
+				F21258DA5FAD06AD3F25CBEB /* CrimpOutputs in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9993372C9C2954D7351744ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A7B4691FF9DF3D108DCF2C0 /* CrimpCore in Frameworks */,
+				59ACF0F5ACB5B0E7F3D91D17 /* CrimpOutputs in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA4B3BE84CF2D6EE102F2E48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01EA8E0F52BC9BC90D1913D8 = {
+			isa = PBXGroup;
+			children = (
+				C0FF1CE0000000000000A001 /* Signing.xcconfig */,
+				45B6D19B44F94E557ADA9AB0 /* App */,
+				978C4A6E629122A00C2B2062 /* Extensions/Thumbnail */,
+				EDBEABBAC8831610FF42E473 /* Extensions/Preview */,
+				02EED70AE30D9F57DF5AEBCB /* UITests */,
+				41F255E551EF8D919C1603F1 /* Loomo.xctestplan */,
+				D4709D6ED2D726A5CB393DEC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D4709D6ED2D726A5CB393DEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B04245853D60726EFA93EBB6 /* Loomo.app */,
+				602A9C50D5E174610B7C8179 /* LoomoThumbnail.appex */,
+				8D82A01546D8E343E48A2475 /* LoomoPreview.appex */,
+				953E1D3583371762F27CADC1 /* LoomoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64AE383333F1B43E02224D59 /* Loomo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 276CF057E270AC88F7A9CE8B /* Build configuration list for PBXNativeTarget "Loomo" */;
+			buildPhases = (
+				E1DC31DE226B84A9A35E5436 /* Sources */,
+				351E6F5611328E6D3FA6844B /* Frameworks */,
+				1D49BD910C7BCD6BE50A3894 /* Resources */,
+				87FE7B45B341FE87EF9A9E48 /* Embed Foundation Extensions */,
+				F6A899ABBDA6A0907228307A /* Embed crimp CLI and schema */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08F9626E5FC15E10D21B823C /* PBXTargetDependency */,
+				6026F6A39D468F6D351D8FBF /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				45B6D19B44F94E557ADA9AB0 /* App */,
+			);
+			name = Loomo;
+			packageProductDependencies = (
+				BD23E80C8791DF18FFA41B46 /* CrimpCore */,
+				9E379EEAFC368E83FD25D2DB /* CrimpOutputs */,
+				ED4FD135F5682DD256FE20A4 /* PartsClient */,
+			);
+			productName = Loomo;
+			productReference = B04245853D60726EFA93EBB6 /* Loomo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F70CB4209D993D092F0EDA4F /* LoomoThumbnail */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A505818857E99E7B91CA097 /* Build configuration list for PBXNativeTarget "LoomoThumbnail" */;
+			buildPhases = (
+				33DE8210C8360DAC07A2C532 /* Sources */,
+				0098389DE7B9E21B79364733 /* Frameworks */,
+				58FE3AF866FADA8F08FF6F9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				978C4A6E629122A00C2B2062 /* Extensions/Thumbnail */,
+			);
+			name = LoomoThumbnail;
+			packageProductDependencies = (
+				6F3E82EC7996242466E3D235 /* CrimpCore */,
+				75DCD12ECEBAEE0DA8FA2E8B /* CrimpOutputs */,
+			);
+			productName = LoomoThumbnail;
+			productReference = 602A9C50D5E174610B7C8179 /* LoomoThumbnail.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		C6925EA02CA51CCA7A397BFF /* LoomoPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE22E2302C8E1948733050F7 /* Build configuration list for PBXNativeTarget "LoomoPreview" */;
+			buildPhases = (
+				ABB0721E5BA406FFEB919EC3 /* Sources */,
+				9993372C9C2954D7351744ED /* Frameworks */,
+				FF5CC94B0C8A73400C800014 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EDBEABBAC8831610FF42E473 /* Extensions/Preview */,
+			);
+			name = LoomoPreview;
+			packageProductDependencies = (
+				7BB6F6785D6B8E0B7E1428F2 /* CrimpCore */,
+				78F36C7F39436C047D014BC5 /* CrimpOutputs */,
+			);
+			productName = LoomoPreview;
+			productReference = 8D82A01546D8E343E48A2475 /* LoomoPreview.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		C7391BF83D3009C9A6E70786 /* LoomoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CBE00D5ADC409863EADB8B5 /* Build configuration list for PBXNativeTarget "LoomoUITests" */;
+			buildPhases = (
+				E89D28BE8F2F2342CDCC8A7C /* Sources */,
+				AA4B3BE84CF2D6EE102F2E48 /* Frameworks */,
+				5C80B3A3501DA03069FA6FEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF0C94AED94E9E6B46FAD9F6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				02EED70AE30D9F57DF5AEBCB /* UITests */,
+			);
+			name = LoomoUITests;
+			packageProductDependencies = (
+			);
+			productName = LoomoUITests;
+			productReference = 953E1D3583371762F27CADC1 /* LoomoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30986921EC1D04126D9144FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					64AE383333F1B43E02224D59 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					F70CB4209D993D092F0EDA4F = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					C6925EA02CA51CCA7A397BFF = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					C7391BF83D3009C9A6E70786 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 64AE383333F1B43E02224D59;
+					};
+				};
+			};
+			buildConfigurationList = 6B7433216B32D202CEF1C126 /* Build configuration list for PBXProject "Loomo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 01EA8E0F52BC9BC90D1913D8;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9936E04123543D6A7BFD000C /* XCLocalSwiftPackageReference "Packages/CrimpKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D4709D6ED2D726A5CB393DEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64AE383333F1B43E02224D59 /* Loomo */,
+				F70CB4209D993D092F0EDA4F /* LoomoThumbnail */,
+				C6925EA02CA51CCA7A397BFF /* LoomoPreview */,
+				C7391BF83D3009C9A6E70786 /* LoomoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D49BD910C7BCD6BE50A3894 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58FE3AF866FADA8F08FF6F9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5CC94B0C8A73400C800014 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C80B3A3501DA03069FA6FEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F6A899ABBDA6A0907228307A /* Embed crimp CLI and schema */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Embed crimp CLI and schema";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Builds the crimp command-line tool from the CrimpKit package, signs it and puts it in the app\n# next to the main executable; copies the .loomo JSON Schema into Resources.\nset -euo pipefail\ncd \"$SRCROOT/Packages/CrimpKit\"\nCONFIG=release\n[ \"$CONFIGURATION\" = \"Debug\" ] && CONFIG=debug\n# Release builds are universal (Apple silicon and Intel), like the app; debug builds are for this Mac only.\nARCHS_ARGS=()\n[ \"$CONFIG\" = release ] && ARCHS_ARGS=(--arch arm64 --arch x86_64)\n# crimp's own Info.plist, linked into the binary: a sandboxed command-line tool won't start without a bundle\n# identifier, and the App Group it names is how crimp finds the app's live-editing socket.\nPLIST=\"$DERIVED_FILE_DIR/crimp-Info.plist\"\nrm -f \"$PLIST\"\n/usr/libexec/PlistBuddy -c \"Add :CFBundleIdentifier string $PRODUCT_BUNDLE_IDENTIFIER.crimp\" -c \"Add :CFBundleName string crimp\" -c \"Add :CFBundleInfoDictionaryVersion string 6.0\" -c \"Add :CFBundleShortVersionString string $MARKETING_VERSION\" -c \"Add :CFBundleVersion string $CURRENT_PROJECT_VERSION\" -c \"Add :LoomoAppGroup string ${LOOMO_APP_GROUP:-}\" \"$PLIST\" >/dev/null\n# A clean environment so Xcode's build variables don't leak into SwiftPM.\nenv -i PATH=\"/usr/bin:/bin:/usr/sbin:/sbin\" HOME=\"$HOME\" DEVELOPER_DIR=\"$DEVELOPER_DIR\" \\\n  swift build -c \"$CONFIG\" ${ARCHS_ARGS[@]+\"${ARCHS_ARGS[@]}\"} --product crimp --scratch-path \"$SRCROOT/Packages/CrimpKit/.build\" -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __info_plist -Xlinker \"$PLIST\" > \"$DERIVED_FILE_DIR/crimp-build.log\" 2>&1 \\\n  || { cat \"$DERIVED_FILE_DIR/crimp-build.log\"; exit 1; }\nBIN=\"$(env -i PATH=\"/usr/bin:/bin\" HOME=\"$HOME\" DEVELOPER_DIR=\"$DEVELOPER_DIR\" swift build -c \"$CONFIG\" ${ARCHS_ARGS[@]+\"${ARCHS_ARGS[@]}\"} --show-bin-path --scratch-path \"$SRCROOT/Packages/CrimpKit/.build\")\"\ncp -f \"$BIN/crimp\" \"$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/crimp\"\n# App Store builds: every executable must be sandboxed; crimp joins the app's App Group to reach the live socket.\nENT_ARGS=()\nif [ -n \"${LOOMO_ENTITLEMENTS_SUFFIX:-}\" ]; then\n  sed \"s/\\$(TeamIdentifierPrefix)/${DEVELOPMENT_TEAM:+$DEVELOPMENT_TEAM.}/g\" \"$SRCROOT/App/Resources/crimp$LOOMO_ENTITLEMENTS_SUFFIX.entitlements\" > \"$DERIVED_FILE_DIR/crimp.entitlements\"\n  ENT_ARGS=(--entitlements \"$DERIVED_FILE_DIR/crimp.entitlements\" --identifier \"$PRODUCT_BUNDLE_IDENTIFIER.crimp\")\nfi\ncodesign --force --options runtime ${ENT_ARGS[@]+\"${ENT_ARGS[@]}\"} --sign \"${EXPANDED_CODE_SIGN_IDENTITY:--}\" \"$TARGET_BUILD_DIR/$EXECUTABLE_FOLDER_PATH/crimp\"\ncp -f \"$SRCROOT/Schemas/loomo.schema.json\" \"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/loomo.schema.json\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E1DC31DE226B84A9A35E5436 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33DE8210C8360DAC07A2C532 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABB0721E5BA406FFEB919EC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E89D28BE8F2F2342CDCC8A7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXContainerItemProxy section */
+		83166B2C040B9E4495EA0BE0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30986921EC1D04126D9144FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F70CB4209D993D092F0EDA4F;
+			remoteInfo = LoomoThumbnail;
+		};
+		F48084B8BF80293CB5B364D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30986921EC1D04126D9144FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6925EA02CA51CCA7A397BFF;
+			remoteInfo = LoomoPreview;
+		};
+		F11998111113C69F4099150D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30986921EC1D04126D9144FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64AE383333F1B43E02224D59;
+			remoteInfo = Loomo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		08F9626E5FC15E10D21B823C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F70CB4209D993D092F0EDA4F /* LoomoThumbnail */;
+			targetProxy = 83166B2C040B9E4495EA0BE0 /* PBXContainerItemProxy */;
+		};
+		6026F6A39D468F6D351D8FBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6925EA02CA51CCA7A397BFF /* LoomoPreview */;
+			targetProxy = F48084B8BF80293CB5B364D9 /* PBXContainerItemProxy */;
+		};
+		DF0C94AED94E9E6B46FAD9F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64AE383333F1B43E02224D59 /* Loomo */;
+			targetProxy = F11998111113C69F4099150D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		87FE7B45B341FE87EF9A9E48 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A3CEB90F31A8DDBB07EADFFA /* LoomoThumbnail.appex in Embed Foundation Extensions */,
+				64614A9BF3EC1C82A689EDB7 /* LoomoPreview.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E93D4A0AF5689F0EE710E131 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0FF1CE0000000000000A001 /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F61010F0031F0322410AF04A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0FF1CE0000000000000A001 /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		E2154D4DEDEA0EEFC0A50175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "App/Resources/Loomo$(LOOMO_ENTITLEMENTS_SUFFIX)$(LOOMO_ICLOUD_SUFFIX).entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = App/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo;
+				PRODUCT_NAME = Loomo;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		E7BBBB1770E9DBA5F2D82E59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "App/Resources/Loomo$(LOOMO_ENTITLEMENTS_SUFFIX)$(LOOMO_ICLOUD_SUFFIX).entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = App/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo;
+				PRODUCT_NAME = Loomo;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		8E415D251FAF9A3E567C56A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Extensions/Thumbnail/Thumbnail$(LOOMO_ENTITLEMENTS_SUFFIX).entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/Thumbnail/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Thumbnail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5DDC1D22EA49C19804A95AFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Extensions/Thumbnail/Thumbnail$(LOOMO_ENTITLEMENTS_SUFFIX).entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/Thumbnail/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Thumbnail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		35E0F12108C1589933B7E6B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Extensions/Preview/Preview$(LOOMO_ENTITLEMENTS_SUFFIX).entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/Preview/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Preview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FCDE7AD0F3286301DCCA776C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Extensions/Preview/Preview$(LOOMO_ENTITLEMENTS_SUFFIX).entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Extensions/Preview/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.Loomo.Preview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DD109239FC1E335F71854DA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.LoomoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Loomo;
+			};
+			name = Debug;
+		};
+		687E525B8793AE1B6FFFF25B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 0.4.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loomo.LoomoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Loomo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B7433216B32D202CEF1C126 /* Build configuration list for PBXProject "Loomo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E93D4A0AF5689F0EE710E131 /* Debug */,
+				F61010F0031F0322410AF04A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		276CF057E270AC88F7A9CE8B /* Build configuration list for PBXNativeTarget "Loomo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2154D4DEDEA0EEFC0A50175 /* Debug */,
+				E7BBBB1770E9DBA5F2D82E59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A505818857E99E7B91CA097 /* Build configuration list for PBXNativeTarget "LoomoThumbnail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E415D251FAF9A3E567C56A5 /* Debug */,
+				5DDC1D22EA49C19804A95AFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE22E2302C8E1948733050F7 /* Build configuration list for PBXNativeTarget "LoomoPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35E0F12108C1589933B7E6B7 /* Debug */,
+				FCDE7AD0F3286301DCCA776C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CBE00D5ADC409863EADB8B5 /* Build configuration list for PBXNativeTarget "LoomoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD109239FC1E335F71854DA6 /* Debug */,
+				687E525B8793AE1B6FFFF25B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		9936E04123543D6A7BFD000C /* XCLocalSwiftPackageReference "Packages/CrimpKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/CrimpKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BD23E80C8791DF18FFA41B46 /* CrimpCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CrimpCore;
+		};
+		9E379EEAFC368E83FD25D2DB /* CrimpOutputs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CrimpOutputs;
+		};
+		ED4FD135F5682DD256FE20A4 /* PartsClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PartsClient;
+		};
+		6F3E82EC7996242466E3D235 /* CrimpCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CrimpCore;
+		};
+		75DCD12ECEBAEE0DA8FA2E8B /* CrimpOutputs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CrimpOutputs;
+		};
+		7BB6F6785D6B8E0B7E1428F2 /* CrimpCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CrimpCore;
+		};
+		78F36C7F39436C047D014BC5 /* CrimpOutputs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CrimpOutputs;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 30986921EC1D04126D9144FA /* Project object */;
+}

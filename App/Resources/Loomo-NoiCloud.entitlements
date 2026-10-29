@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	Builds without an Apple Developer team (see Config/Signing.xcconfig): the same as Loomo.entitlements minus
+	iCloud, which needs a team. Direct-download build (Developer ID): not sandboxed, so the local parts backend, `crimp` editing files
+	anywhere, and "Add to Claude Desktop" all work. The Mac App Store / TestFlight build uses
+	Loomo-AppStore.entitlements instead (scripts/release.sh appstore).
+	-->
+	<key>com.apple.security.app-sandbox</key>
+	<false/>
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
+</dict>
+</plist>

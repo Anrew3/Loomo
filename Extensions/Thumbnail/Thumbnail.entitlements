@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Quick Look extensions must be sandboxed; Quick Look grants read access to the file being shown. -->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<!--
+	Read-only access to the app's part-photo cache and parts library (custom photos), so Finder shows the
+	same photos as the app. Temporary exceptions are fine for Developer ID; for the Mac App Store, move
+	this data to a shared App Group container instead.
+	-->
+	<key>com.apple.security.temporary-exception.files.home-relative-path.read-only</key>
+	<array>
+		<string>/Library/Caches/Loomo/</string>
+		<string>/Library/Application Support/Loomo/</string>
+	</array>
+</dict>
+</plist>

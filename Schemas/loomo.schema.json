@@ -1,0 +1,418 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Anrew3/Loomo/main/Schemas/loomo.schema.json",
+  "title": "Loomo harness (.loomo)",
+  "description": "A wire harness design. All lengths are millimetres, positions are drawing points. Only the design is stored: wire lengths, bundle diameters, the BOM and rule checks are computed when the file is opened (or with `crimp info` / `crimp validate`). Fields not marked required may be left out and take the defaults shown. IDs are reference designators: C# connectors, T# loose terminals, SP# splices, W# wires, N# drawing nodes, S# bundle segments, CV# coverings, CB# cables, TW# twists, L# labels, A# annotations.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 3, "default": 3 },
+    "name": { "type": "string", "default": "Untitled Harness" },
+    "revision": { "type": "string", "default": "A" },
+    "settings": { "$ref": "#/$defs/settings" },
+    "titleBlock": { "$ref": "#/$defs/titleBlock" },
+    "nodes": { "type": "array", "items": { "$ref": "#/$defs/node" }, "default": [] },
+    "segments": { "type": "array", "items": { "$ref": "#/$defs/segment" }, "default": [] },
+    "connectors": { "type": "array", "items": { "$ref": "#/$defs/connector" }, "default": [] },
+    "wires": { "type": "array", "items": { "$ref": "#/$defs/wire" }, "default": [] },
+    "cables": { "type": "array", "items": { "$ref": "#/$defs/cable" }, "default": [] },
+    "twists": { "type": "array", "items": { "$ref": "#/$defs/twist" }, "default": [] },
+    "splices": { "type": "array", "items": { "$ref": "#/$defs/splice" }, "default": [] },
+    "coverings": { "type": "array", "items": { "$ref": "#/$defs/covering" }, "default": [] },
+    "labels": { "type": "array", "items": { "$ref": "#/$defs/label" }, "default": [] },
+    "notes": { "type": "array", "items": { "$ref": "#/$defs/note" }, "default": [] },
+    "revisions": { "type": "array", "items": { "$ref": "#/$defs/revision" }, "default": [] },
+    "tools": { "type": "array", "items": { "$ref": "#/$defs/tool" }, "default": [] },
+    "annotations": { "type": "array", "items": { "$ref": "#/$defs/annotation" }, "default": [] },
+    "bomQuantityOverrides": {
+      "description": "Fixed BOM quantities keyed by BOM line id (\"category|partKey\").",
+      "type": "object", "additionalProperties": { "type": "number" }, "default": {}
+    },
+    "bomExcluded": { "description": "BOM line ids left off the BOM.", "type": "array", "items": { "type": "string" }, "default": [] },
+    "bomExtraLines": { "type": "array", "items": { "$ref": "#/$defs/extraBOMLine" }, "default": [] },
+    "acceptedIssues": {
+      "description": "Rule-check results reviewed and accepted as deviations. Each matches one exact check (subject and message); if the design changes the message, the check reappears.",
+      "type": "array", "items": { "$ref": "#/$defs/acceptedIssue" }, "default": []
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "base64": { "type": "string", "contentEncoding": "base64" },
+    "hexColor": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+    "point": {
+      "type": "object",
+      "properties": { "x": { "type": "number" }, "y": { "type": "number" } },
+      "required": ["x", "y"], "additionalProperties": false
+    },
+    "part": {
+      "description": "A purchasable part. Generic placeholders use isGeneric: true with a description (mpn \"GENERIC\").",
+      "type": "object",
+      "properties": {
+        "mpn": { "type": "string" },
+        "manufacturer": { "type": "string", "default": "" },
+        "description": { "type": "string" },
+        "internalPN": { "type": "string", "description": "Company part number shown next to the MPN." },
+        "alternates": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "isGeneric": { "type": "boolean", "default": false },
+        "octopartID": { "type": "string" },
+        "datasheetURL": { "type": "string", "format": "uri" },
+        "imageURL": { "type": "string", "format": "uri" },
+        "unitPrice": { "type": "number", "minimum": 0 },
+        "stripLengthMM": { "type": "number", "minimum": 0 },
+        "crimpTool": { "type": "string" },
+        "minWireMM2": { "type": "number", "minimum": 0 },
+        "maxWireMM2": { "type": "number", "minimum": 0 },
+        "minInsulationODMM": { "type": "number", "minimum": 0 },
+        "maxInsulationODMM": { "type": "number", "minimum": 0 },
+        "positionCount": { "type": "integer", "minimum": 1, "description": "Cavities, for housings." },
+        "contactGender": { "type": "string", "description": "\"male\" or \"female\" when known." },
+        "rowCount": { "type": "integer", "minimum": 1 },
+        "pitchMM": { "type": "number", "minimum": 0 },
+        "dataSources": { "type": "object", "additionalProperties": { "type": "string" }, "description": "Which parts source supplied each field, e.g. {\"imageURL\": \"digikey\"}." },
+        "category": { "type": "string", "description": "The distributor's product category, e.g. Automotive Connectors or Fuse Holders." }
+      },
+      "required": ["mpn"], "additionalProperties": false
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "terminationAllowanceMM": { "type": "number", "minimum": 0, "default": 20, "description": "Added to each wire end for stripping, crimping and service loop." },
+        "materialMarginPercent": { "type": "number", "minimum": 0, "default": 5 },
+        "bundlePackingFactor": { "type": "number", "minimum": 1, "default": 1.2 },
+        "cutLengthRoundingMM": { "type": "number", "minimum": 0, "default": 5 },
+        "units": { "enum": ["metric", "imperial"], "default": "metric", "description": "Display units only; the file is always mm." },
+        "gridSize": { "type": "number", "minimum": 1, "default": 10 },
+        "snapToGrid": { "type": "boolean", "default": true },
+        "showPartPhotos": { "type": "boolean", "default": true },
+        "showConnectionTables": { "type": "boolean", "default": false, "description": "Draw each connector's and splice's connection table beside it." },
+        "showItemNumbers": { "type": "boolean", "default": false, "description": "Show BOM item numbers ([3]) beside parts on the drawing." }
+      },
+      "additionalProperties": false
+    },
+    "titleBlock": {
+      "type": "object",
+      "properties": {
+        "company": { "type": "string" }, "drawingNumber": { "type": "string" }, "drawnBy": { "type": "string" },
+        "checkedBy": { "type": "string" }, "approvedBy": { "type": "string" },
+        "sheetSize": { "enum": ["a4", "a3", "a2", "a1", "a0", "letter", "tabloid", "archD", "custom"], "default": "a3" },
+        "customWidthIn": { "type": "number", "exclusiveMinimum": 1, "description": "Page width in inches when sheetSize is custom." },
+        "customHeightIn": { "type": "number", "exclusiveMinimum": 1, "description": "Page height in inches when sheetSize is custom." },
+        "logoPNG": { "$ref": "#/$defs/base64" }
+      },
+      "additionalProperties": false
+    },
+    "node": {
+      "description": "A point on the drawing: where a connector or splice sits, or a breakout/clip along the bundles.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["connector", "splice", "breakout", "clip"] },
+        "label": { "type": "string", "default": "" },
+        "position": { "$ref": "#/$defs/point" },
+        "part": { "$ref": "#/$defs/part", "description": "Clip, grommet or tie for clip nodes." }
+      },
+      "required": ["id", "kind"], "additionalProperties": false
+    },
+    "segment": {
+      "description": "A bundle section between two nodes. Wire lengths are the shortest path through these.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeA": { "$ref": "#/$defs/id" },
+        "nodeB": { "$ref": "#/$defs/id" },
+        "lengthMM": { "type": "number", "exclusiveMinimum": 0 }
+      },
+      "required": ["id", "nodeA", "nodeB", "lengthMM"], "additionalProperties": false
+    },
+    "cavity": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string", "description": "Cavity name as printed on the housing, e.g. \"1\" or \"A\"." },
+        "signal": { "type": "string" },
+        "terminal": { "$ref": "#/$defs/part" },
+        "seal": { "$ref": "#/$defs/part" },
+        "plug": { "$ref": "#/$defs/part", "description": "Fitted in an unused cavity of a sealed housing." },
+        "doubleCrimp": { "type": "boolean", "description": "Two wires share this terminal." }
+      },
+      "required": ["label"], "additionalProperties": false
+    },
+    "accessory": {
+      "type": "object",
+      "properties": {
+        "kind": { "type": "string", "description": "wedgelock, backshell, boot, TPA…" },
+        "part": { "$ref": "#/$defs/part" },
+        "quantity": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["kind", "part", "quantity"], "additionalProperties": false
+    },
+    "faceLayout": {
+      "description": "Mating-face drawing, in mm, origin at the top-left of the face.",
+      "type": "object",
+      "properties": {
+        "shape": { "enum": ["rectangle", "rounded", "circle"], "default": "rounded" },
+        "width": { "type": "number" }, "height": { "type": "number" },
+        "cavities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": { "label": { "type": "string" }, "x": { "type": "number" }, "y": { "type": "number" }, "diameter": { "type": "number" } },
+            "required": ["label", "x", "y", "diameter"], "additionalProperties": false
+          }
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": { "x": { "type": "number" }, "y": { "type": "number" }, "width": { "type": "number" }, "height": { "type": "number" } },
+            "required": ["x", "y", "width", "height"], "additionalProperties": false
+          }
+        },
+        "backdropPNG": { "$ref": "#/$defs/base64" },
+        "backdropMMPerPixel": { "type": "number" },
+        "backdropOffset": { "$ref": "#/$defs/point" },
+        "source": { "type": "string" }
+      },
+      "required": ["width", "height"], "additionalProperties": false
+    },
+    "connector": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id", "description": "Reference designator, e.g. C1 (T1 for loose terminals)." },
+        "name": { "type": "string", "default": "" },
+        "kind": { "enum": ["housing", "pigtail", "device", "ringTerminal", "spadeTerminal", "ferrule", "quickConnect", "fuseBox", "relay", "loosePins"], "default": "housing" },
+        "part": { "$ref": "#/$defs/part" },
+        "gender": { "enum": ["male", "female"], "default": "female" },
+        "sealed": { "type": "boolean", "default": false, "description": "Each used cavity needs a wire seal and each unused one a plug." },
+        "nodeID": { "$ref": "#/$defs/id", "description": "Where it sits on the drawing." },
+        "cavities": { "type": "array", "items": { "$ref": "#/$defs/cavity" }, "default": [] },
+        "accessories": { "type": "array", "items": { "$ref": "#/$defs/accessory" }, "default": [] },
+        "gridColumns": { "type": "integer", "minimum": 1 },
+        "insertionDepthMM": { "type": "number", "minimum": 0, "default": 0 },
+        "backshellEntryMM": { "type": "number", "minimum": 0, "default": 0 },
+        "leadLengthMM": { "type": "number", "minimum": 0 },
+        "notes": { "type": "string", "default": "" },
+        "faceLayout": { "$ref": "#/$defs/faceLayout" },
+        "tagOffset": { "$ref": "#/$defs/point", "description": "How far the photo and designator text sit from their default place by the connector dot." },
+        "tagUnlocked": { "type": "boolean", "description": "Photo and text can be dragged on their own (otherwise dragging them moves the connector)." },
+        "boxItems": { "type": "array", "items": { "$ref": "#/$defs/boxItem" }, "default": [], "description": "Fuses, relays and other parts plugged into a fuse or relay box." },
+        "mate": { "$ref": "#/$defs/id", "description": "The other half of an in-line mated pair in this harness; cavities mate by label." },
+        "imagePNG": { "$ref": "#/$defs/base64", "description": "This connector's own picture; drawn instead of the part photo." },
+        "tableOffset": { "$ref": "#/$defs/point", "description": "How far its connection table has been moved from its default place." }
+      },
+      "required": ["id"], "additionalProperties": false
+    },
+    "boxItem": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id", "description": "F1, R1…" },
+        "kind": { "enum": ["fuse", "relay", "diode", "jumper", "circuitBreaker", "other"], "default": "fuse" },
+        "part": { "$ref": "#/$defs/part" },
+        "rating": { "type": "string", "description": "e.g. 15 A" },
+        "cavities": { "type": "array", "items": { "type": "string" }, "default": [], "description": "Cavity labels it spans; fuses and jumpers join them electrically." }
+      },
+      "required": ["id"], "additionalProperties": false
+    },
+    "endpoint": {
+      "description": "A wire end: a connector cavity, a splice, or unassigned (waiting in the pinout editor).",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "object",
+              "properties": { "connector": { "$ref": "#/$defs/id" }, "cavity": { "type": "string" } },
+              "required": ["connector", "cavity"], "additionalProperties": false
+            }
+          },
+          "required": ["pin"], "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": { "splice": { "$ref": "#/$defs/id" } },
+          "required": ["splice"], "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": { "unassigned": { "const": true } },
+          "required": ["unassigned"], "additionalProperties": false
+        }
+      ]
+    },
+    "wireSize": {
+      "description": "Give awg, or crossSectionMM2 for metric sizes (both when known).",
+      "type": "object",
+      "properties": {
+        "awg": { "type": "integer" },
+        "crossSectionMM2": { "type": "number", "exclusiveMinimum": 0 },
+        "customLabel": { "type": "string" }
+      },
+      "anyOf": [{ "required": ["awg"] }, { "required": ["crossSectionMM2"] }],
+      "additionalProperties": false
+    },
+    "iecColor": {
+      "description": "IEC 60757 colour code, plus LB light blue, LG light green, DB dark blue, DG dark green, TN tan and BG beige.",
+      "enum": ["BK", "BN", "RD", "OG", "YE", "GN", "BU", "VT", "GY", "WH", "PK", "TQ", "GD", "SR", "LB", "LG", "DB", "DG", "TN", "BG"]
+    },
+    "wire": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "signal": { "type": "string" },
+        "size": { "$ref": "#/$defs/wireSize" },
+        "color": {
+          "type": "object",
+          "properties": { "base": { "$ref": "#/$defs/iecColor" }, "stripe": { "$ref": "#/$defs/iecColor" } },
+          "required": ["base"], "additionalProperties": false
+        },
+        "insulation": { "type": "string", "default": "TXL", "description": "TXL, GXL, SXL, PTFE, ETFE, XLPE, PVC, Silicone…" },
+        "outerDiameterMM": { "type": "number", "exclusiveMinimum": 0, "description": "Defaults from size and insulation." },
+        "part": { "$ref": "#/$defs/part" },
+        "from": { "$ref": "#/$defs/endpoint" },
+        "to": { "$ref": "#/$defs/endpoint" },
+        "lengthOverrideMM": { "type": "number", "exclusiveMinimum": 0, "description": "Replaces the computed length." },
+        "extraLengthMM": { "type": "number", "default": 0, "description": "Added to the computed length." },
+        "cableID": { "$ref": "#/$defs/id", "description": "Set for cores of a multicore cable." },
+        "role": { "enum": ["conductor", "drain", "shield"], "default": "conductor" },
+        "markerText": { "type": "string" }
+      },
+      "required": ["id", "size", "from", "to"], "additionalProperties": false
+    },
+    "cable": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "name": { "type": "string" }, "part": { "$ref": "#/$defs/part" },
+        "shielded": { "type": "boolean", "default": false },
+        "jacketODMM": { "type": "number", "default": 5 }, "jacketStripMM": { "type": "number", "default": 40 },
+        "colorHex": { "$ref": "#/$defs/hexColor" }
+      },
+      "required": ["id"], "additionalProperties": false
+    },
+    "twist": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "wireIDs": { "type": "array", "items": { "$ref": "#/$defs/id" }, "minItems": 2 },
+        "layLengthMM": { "type": "number", "exclusiveMinimum": 0, "default": 25 }
+      },
+      "required": ["id", "wireIDs"], "additionalProperties": false
+    },
+    "splice": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["ultrasonic", "crimp", "solderSleeve", "inlineDiode", "inlineResistor"], "default": "ultrasonic" },
+        "part": { "$ref": "#/$defs/part" },
+        "heatShrink": { "$ref": "#/$defs/part" },
+        "nodeID": { "$ref": "#/$defs/id", "description": "Several splices may share one node." },
+        "value": { "type": "string", "description": "For in-line parts, e.g. 1N4007 or 120 Ω." },
+        "tableOffset": { "$ref": "#/$defs/point", "description": "How far its connection table has been moved from its default place." }
+      },
+      "required": ["id"], "additionalProperties": false
+    },
+    "covering": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["convolutedTube", "braidedSleeve", "heatShrink", "sleeve", "tape"] },
+        "part": { "$ref": "#/$defs/part" },
+        "segmentIDs": { "type": "array", "items": { "$ref": "#/$defs/id" }, "default": [] },
+        "innerDiameterMM": { "type": "number" },
+        "minDiameterMM": { "type": "number" },
+        "tape": {
+          "type": "object",
+          "properties": {
+            "style": { "enum": ["halfLap", "spiral", "spot"] },
+            "widthMM": { "type": "number" }, "pitchMM": { "type": "number" }, "turnsPerSpot": { "type": "integer" }
+          },
+          "required": ["style", "widthMM", "pitchMM", "turnsPerSpot"], "additionalProperties": false
+        },
+        "colorHex": { "$ref": "#/$defs/hexColor" }
+      },
+      "required": ["id", "kind"], "additionalProperties": false
+    },
+    "label": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "placement": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "segment": {
+                  "type": "object",
+                  "properties": { "id": { "$ref": "#/$defs/id" }, "offsetMM": { "type": "number", "description": "From the segment's nodeA." } },
+                  "required": ["id", "offsetMM"], "additionalProperties": false
+                }
+              },
+              "required": ["segment"], "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": { "connector": { "$ref": "#/$defs/id" } },
+              "required": ["connector"], "additionalProperties": false
+            }
+          ]
+        },
+        "text": { "type": "string", "description": "Fixed text; omit to follow the item's designator." },
+        "part": { "$ref": "#/$defs/part" }
+      },
+      "required": ["id", "placement"], "additionalProperties": false
+    },
+    "note": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer", "description": "Note number, drawn as a flag." },
+        "text": { "type": "string" },
+        "attachedTo": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+      },
+      "required": ["id", "text", "attachedTo"], "additionalProperties": false
+    },
+    "revision": {
+      "type": "object",
+      "properties": { "rev": { "type": "string" }, "date": { "type": "string" }, "description": { "type": "string" }, "author": { "type": "string" } },
+      "required": ["rev", "date", "description", "author"], "additionalProperties": false
+    },
+    "tool": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["crimpTool", "die", "extractionTool", "fixture", "equipment"] },
+        "name": { "type": "string" }, "partNumber": { "type": "string" }, "notes": { "type": "string" }
+      },
+      "required": ["id", "kind", "name", "partNumber", "notes"], "additionalProperties": false
+    },
+    "annotation": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["text", "arrow", "rectangle", "ellipse", "image", "frame", "sticky"] },
+        "x": { "type": "number" }, "y": { "type": "number" }, "width": { "type": "number" }, "height": { "type": "number" },
+        "text": { "type": "string" }, "colorHex": { "$ref": "#/$defs/hexColor" },
+        "imagePNG": { "$ref": "#/$defs/base64" },
+        "z": { "type": "integer" },
+        "dashed": { "type": "boolean", "description": "Frames: dashed outline (an option or variant)." }
+      },
+      "required": ["id", "kind", "x", "y", "width", "height", "text", "colorHex", "z"], "additionalProperties": false
+    },
+    "acceptedIssue": {
+      "type": "object",
+      "properties": {
+        "subject": { "type": "string", "description": "What the check is about, e.g. C3:2 or W12." },
+        "message": { "type": "string", "description": "The check's message, exactly as the rule checker reports it." },
+        "reason": { "type": "string", "minLength": 1 },
+        "acceptedBy": { "type": "string" },
+        "date": { "type": "string", "format": "date" }
+      },
+      "required": ["subject", "message", "reason"], "additionalProperties": false
+    },
+    "extraBOMLine": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" }, "part": { "$ref": "#/$defs/part" },
+        "quantity": { "type": "number" }, "category": { "type": "string" }
+      },
+      "required": ["id", "part", "quantity", "category"], "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,24 @@
+# Build output
+.build/
+build/
+DerivedData/
+.swiftpm/
+*.xcuserstate
+xcuserdata/
+
+# Secrets and local data. API keys live in the Keychain (the app) or the environment (crimp), never in files here.
+.env
+backend/
+*.env
+__pycache__/
+
+# macOS
+.DS_Store
+
+# This Mac's signing team (see Config/Local.xcconfig.example)
+Config/Local.xcconfig
+
+# Your own harness designs and scripts: keep them out of the repository.
+Designs/
+Schemas/examples/
+scripts/examples/

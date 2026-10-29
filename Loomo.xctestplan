@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "id": "2BC2D149-7F22-5E61-A076-CF2C0B96C36A",
+      "name": "Default",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "codeCoverage": {
+      "targets": [
+        {
+          "containerPath": "container:Packages/CrimpKit",
+          "identifier": "CrimpCore",
+          "name": "CrimpCore"
+        },
+        {
+          "containerPath": "container:Packages/CrimpKit",
+          "identifier": "CrimpOutputs",
+          "name": "CrimpOutputs"
+        }
+      ]
+    },
+    "testExecutionOrdering": "random"
+  },
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:Packages/CrimpKit",
+        "identifier": "CrimpCoreTests",
+        "name": "CrimpCoreTests"
+      }
+    }
+  ],
+  "version": 1
+}

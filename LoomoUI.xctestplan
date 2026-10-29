@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "id": "ECF28B7D-6900-56A7-A902-4312ED020B91",
+      "name": "Default",
+      "options": {}
+    }
+  ],
+  "defaultOptions": {
+    "targetForVariableExpansion": {
+      "containerPath": "container:Loomo.xcodeproj",
+      "identifier": "64AE383333F1B43E02224D59",
+      "name": "Loomo"
+    }
+  },
+  "testTargets": [
+    {
+      "target": {
+        "containerPath": "container:Loomo.xcodeproj",
+        "identifier": "C7391BF83D3009C9A6E70786",
+        "name": "LoomoUITests"
+      }
+    }
+  ],
+  "version": 1
+}

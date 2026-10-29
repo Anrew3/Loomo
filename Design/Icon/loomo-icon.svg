@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Loomo app icon, master artwork (round 9 "all three": ring start, soft corners, centred).
+
+  Canvas: Apple's macOS app-icon grid, 1024 × 1024, with an 824 × 824 body inset 100 px and a
+  185.4 px corner radius. All artwork is drawn in a 100-unit design space inside that body
+  (1 unit = 8.24 px), so the numbers below are the design's own numbers.
+
+  Geometry, in design units:
+    dot grid      3 × 3 at x, y ∈ {28, 50, 72}, radius 3.2, less the top-left peg (the start ring is there)
+    wire          weight 7, round caps and joins
+                  starts at the ring's outer edge (30, 32), runs down to a soft corner (radius 8) at y 46,
+                  across to x 50, down through a second soft corner, and into a three-quarter loop
+                  (radius 12, centre 62, 60) that ends at the top of the "o"
+    start ring    centre (30, 24), radius 6, stroke 4
+    node          centre (62, 48), radius 6
+  Every curve is a true circular arc.
+
+  Render with scripts/make-icon.sh. Do not hand-edit the PNGs in the asset catalog.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Apple's template shadow: 10 px down, 20 px blur, black at 30 %. -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(100 100) scale(8.24)">
+    <!-- Body -->
+    <rect width="100" height="100" rx="22.5" fill="#F6F7F9" filter="url(#shadow)"/>
+
+    <!-- Formboard dot grid. The top-left peg is where the route starts, so the start ring takes its place. -->
+    <g fill="#C9CED8">
+      <circle cx="50" cy="28" r="3.2"/><circle cx="72" cy="28" r="3.2"/>
+      <circle cx="28" cy="50" r="3.2"/><circle cx="50" cy="50" r="3.2"/><circle cx="72" cy="50" r="3.2"/>
+      <circle cx="28" cy="72" r="3.2"/><circle cx="50" cy="72" r="3.2"/><circle cx="72" cy="72" r="3.2"/>
+    </g>
+
+    <!-- The wire: route, two soft corners, then the "o" -->
+    <path d="M30 32
+             V38
+             A8 8 0 0 0 38 46
+             H42
+             A8 8 0 0 1 50 54
+             V60
+             A12 12 0 1 0 62 48"
+          fill="none" stroke="#0F172A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Start ring (where the route begins) -->
+    <circle cx="30" cy="24" r="6" fill="none" stroke="#0F172A" stroke-width="4"/>
+
+    <!-- Node (where the route ends) -->
+    <circle cx="62" cy="48" r="6" fill="#2F6BFF"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+// Signing for Loomo builds.
+//
+// As committed, Loomo builds for anyone: ad-hoc signed ("Sign to Run Locally"), with iCloud off because iCloud
+// needs an Apple Developer team. Everything else works, including parts search and Claude (MCP).
+//
+// To sign with your own team (needed for iCloud, and for a notarized DMG), copy Local.xcconfig.example to
+// Local.xcconfig in this folder and fill it in. Local.xcconfig is ignored by git.
+
+DEVELOPMENT_TEAM =
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_IDENTITY = -
+
+// "-NoiCloud" picks App/Resources/Loomo-NoiCloud.entitlements; empty picks Loomo.entitlements (with iCloud).
+LOOMO_ICLOUD_SUFFIX = -NoiCloud
+
+// Release channel. Empty for direct download (Developer ID); scripts/release.sh sets the App Store values:
+// entitlements with the App Sandbox, and the App Group shared with the extensions and crimp.
+LOOMO_APP_GROUP =
+LOOMO_ENTITLEMENTS_SUFFIX =
+
+#include? "Local.xcconfig"

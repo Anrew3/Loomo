@@ -1,0 +1,7 @@
+// Copy to Local.xcconfig (same folder) to sign Loomo with your Apple Developer team. Git ignores Local.xcconfig.
+// Your Team ID is at developer.apple.com > Account > Membership details.
+
+DEVELOPMENT_TEAM = ABCDE12345
+CODE_SIGN_IDENTITY = Apple Development
+// With a team, iCloud works: use the entitlements that include it.
+LOOMO_ICLOUD_SUFFIX =

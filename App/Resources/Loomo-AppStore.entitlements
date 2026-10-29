@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	Mac App Store and TestFlight build (scripts/release.sh appstore). The direct-download build uses
+	Loomo.entitlements, which isn't sandboxed.
+	-->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<!-- Open and save panels, and reopening recent projects through security-scoped bookmarks. -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+	<key>com.apple.security.files.bookmarks.app-scope</key>
+	<true/>
+	<!-- Distributor lookups and part photos. -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+	<!-- Shared with the Quick Look extensions and crimp: parts library, photo cache, live-editing socket. -->
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>$(TeamIdentifierPrefix)com.loomo.shared</string>
+	</array>
+	<!--
+	iCloud: projects in iCloud Drive ▸ Loomo (CloudDocuments), the shared team parts library (CloudKit,
+	TeamLibrary) and preferences that follow the Apple ID (key-value storage, SettingsSync).
+	-->
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array>
+		<string>iCloud.com.loomo.Loomo</string>
+	</array>
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudDocuments</string>
+		<string>CloudKit</string>
+	</array>
+	<key>com.apple.developer.ubiquity-container-identifiers</key>
+	<array>
+		<string>iCloud.com.loomo.Loomo</string>
+	</array>
+	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
+	<string>$(TeamIdentifierPrefix)$(CFBundleIdentifier)</string>
+</dict>
+</plist>

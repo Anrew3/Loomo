@@ -450,7 +450,9 @@ struct TopologyCanvas: View {
         guard b.width > 0 else { zoom = 1; return }
         // The floating view bar covers the top 64 points and the status bar the bottom 52.
         let bars = (top: CGFloat(64), bottom: CGFloat(52))
-        guard let visible = anchor.visibleRect(), visible.width > 100 else {
+        // The window-based measure is only right when the sidebar and inspector float over the canvas. Where they
+        // sit beside it instead, it comes out as the whole window: then the canvas's own size is the truth.
+        guard let visible = anchor.visibleRect(), visible.width > 100, viewport.width == 0 || visible.width <= viewport.width + 1 else {
             guard viewport.width > 0 else { zoom = 1; return }
             let size = CGSize(width: viewport.width, height: max(200, viewport.height - bars.top - bars.bottom))
             let z = max(0.25, min(2, min(size.width / (b.width + 80), size.height / (b.height + 80))))
@@ -871,7 +873,7 @@ final class CanvasAnchor {
     func visibleRect() -> CGRect? {
         guard let view, let window = view.window, let scroll = view.enclosingScrollView else { return nil }
         var r = scroll.convert(scroll.bounds, to: nil).intersection(window.contentLayoutRect)
-        for side in Self.sideColumns(in: window) {
+        for side in Self.sideColumns(in: window, besides: view) {
             guard side.intersects(r) else { continue }
             if side.midX < r.midX { r = CGRect(x: max(r.minX, side.maxX), y: r.minY, width: r.maxX - max(r.minX, side.maxX), height: r.height) }
             else { r.size.width = min(r.maxX, side.minX) - r.minX }
@@ -879,15 +881,17 @@ final class CanvasAnchor {
         return r.isNull || r.width <= 0 ? nil : r
     }
 
-    /// Frames (window coordinates) of the window's open sidebar and inspector columns.
-    static func sideColumns(in window: NSWindow) -> [CGRect] {
+    /// Frames (window coordinates) of the window's open side columns: every column of a split view other than the
+    /// one holding `canvas`. (Matching on the item's behavior isn't enough: on recent macOS, SwiftUI's inspector
+    /// column isn't marked as an inspector, so it was counted as visible and the drawing fitted underneath it.)
+    static func sideColumns(in window: NSWindow, besides canvas: NSView? = nil) -> [CGRect] {
         var out: [CGRect] = []
         func visit(_ vc: NSViewController) {
             if let split = vc as? NSSplitViewController {
-                for item in split.splitViewItems where !item.isCollapsed && item.viewController.isViewLoaded
-                    && (item.behavior == .sidebar || item.behavior == .inspector) {
+                for item in split.splitViewItems where !item.isCollapsed && item.viewController.isViewLoaded {
                     let v = item.viewController.view
-                    if !v.isHidden, v.frame.width > 1 { out.append(v.convert(v.bounds, to: nil)) }
+                    let holdsCanvas = canvas.map { $0.isDescendant(of: v) } ?? (item.behavior != .sidebar && item.behavior != .inspector)
+                    if !holdsCanvas, !v.isHidden, v.frame.width > 1 { out.append(v.convert(v.bounds, to: nil)) }
                 }
             }
             vc.children.forEach(visit)
@@ -944,3 +948,4 @@ extension Color {
         self.init(red: Double((v >> 16) & 0xFF) / 255, green: Double((v >> 8) & 0xFF) / 255, blue: Double(v & 0xFF) / 255)
     }
 }
+

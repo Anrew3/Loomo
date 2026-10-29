@@ -14,7 +14,26 @@ Draw the harness, and Loomo works out the wire lengths, bill of materials, cut l
 
 [Install](#install) · [Features](#features) · [Quick start](#quick-start) · [Guide](docs/GUIDE.md) · [Contributing](CONTRIBUTING.md)
 
+<br>
+
+<img src="docs/images/drawing.jpg" width="900" alt="Loomo showing a harness drawing with connectors, a splice and bundle lengths">
+
 </div>
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="docs/images/pinouts.jpg" alt="Connectors and pinouts, with an ECU's mating face colored by wire"></td>
+    <td><img src="docs/images/bom.jpg" alt="Bill of materials with a chart of pieces by category"></td>
+    <td><img src="docs/images/export.jpg" alt="Print and export, previewing the drawing set"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Pinouts</b><br>Cavity grids and mating faces, colored by wire</td>
+    <td align="center"><b>Bill of materials</b><br>Every part, contact and wire length</td>
+    <td align="center"><b>Drawing set</b><br>Print-ready PDF sheets</td>
+  </tr>
+</table>
 
 ## Features
 
@@ -31,7 +50,7 @@ Draw the harness, and Loomo works out the wire lengths, bill of materials, cut l
 
 ## Install
 
-1. Download the latest **Loomo.dmg** from [Releases](../../releases).
+1. Download the latest **Loomo.dmg** from [Releases](https://github.com/Anrew3/Loomo/releases).
 2. Open it and drag **Loomo** to **Applications**.
 3. Open Loomo. It's signed and notarized, so macOS opens it normally.
 
